@@ -1,6 +1,14 @@
-const Admin = require("../models/Admin.Model");
+const admin = require("../models/Admin.Model");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+// generate a token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 // register a new admin
 module.exports.register = asyncHandler(async (req, res) => {
@@ -13,30 +21,39 @@ module.exports.register = asyncHandler(async (req, res) => {
     });
   }
   // check if the email is already registered
-  await Admin.findOne({ email }).then((admin) => {
-    if (admin) {
-      return res.status(400).json({
-        message: "Email already registered",
-      });
-    }
-  });
+  const adminAlreadyRegistered = await admin.findOne({ email });
+  if (adminAlreadyRegistered) {
+    return res.status(400).json({
+      message: "Email already registered",
+    });
+  }
+  // hash the password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
   //create a new admin
-  const newAdmin = await Admin.create({
+  const newAdmin = await admin.create({
     firstName,
     lastName,
     email,
-    password,
+    password: hashedPassword,
     phoneNumber,
   });
   // save the admin
   if (newAdmin) {
-    res.status(201).json({
-      _id: newAdmin._id,
-      firstName: newAdmin.firstName,
-      lastName: newAdmin.lastName,
-      email: newAdmin.email,
-      phoneNumber: newAdmin.phoneNumber,
-    });
+    res
+      .status(201)
+      .cookie("token", generateToken(newAdmin._id), {
+        httpOnly: true,
+      })
+      .json({
+        _id: newAdmin._id,
+        firstName: newAdmin.firstName,
+        lastName: newAdmin.lastName,
+        email: newAdmin.email,
+        phoneNumber: newAdmin.phoneNumber,
+        token: generateToken(newAdmin._id),
+      });
   } else {
     res.status(400);
     throw new Error("Invalid admin data");
@@ -52,31 +69,51 @@ module.exports.login = asyncHandler(async (req, res) => {
     });
   }
   // check if the email is already registered
-  await Admin.findOne({ email }).then((admin) => {
-    if (!admin) {
-      return res.status(400).json({
-        message: "Email not found",
-      });
-    }
-  });
-  const admin = await Admin.findOne({ email });
-  if (admin && (await bcrypt.compare(password, admin.password))) {
-    res.json({
-      _id: admin._id,
-      firstName: admin.firstName,
-      lastName: admin.lastName,
-      email: admin.email,
-      phoneNumber: admin.phoneNumber,
-      token: generateToken(admin._id),
+  const currentAdmin = await admin.findOne({ email });
+  if (!currentAdmin) {
+    return res.status(400).json({
+      message: "Email not found",
     });
+  }
+
+  if (currentAdmin && (await bcrypt.compare(password, currentAdmin.password))) {
+    res
+      .status(201)
+      .cookie("token", generateToken(currentAdmin._id), {
+        httpOnly: true,
+      })
+      .json({
+        _id: currentAdmin._id,
+        firstName: currentAdmin.firstName,
+        lastName: currentAdmin.lastName,
+        email: currentAdmin.email,
+        phoneNumber: currentAdmin.phoneNumber,
+        token: generateToken(currentAdmin._id),
+      });
   } else {
     res.status(401);
     throw new Error("Invalid email or password");
   }
 });
+
 // logout an admin
-module.exports.logout = (req, res) => {};
+module.exports.logout = asyncHandler(async (req, res) => {
+  res.clearCookie("token").json({
+    message: "Logged out",
+  });
+});
 // get all admins
-module.exports.getAllAdmins = (req, res) => {};
+module.exports.getAll = asyncHandler(async (req, res) => {
+  const admins = await admin.find({});
+  res.json(admins);
+});
 // get a single admin
-module.exports.getOneAdmin = (req, res) => {};
+module.exports.getOne = asyncHandler(async (req, res) => {
+  const getAdmin = await admin.findById(req.body);
+  if (getAdmin) {
+    res.json(getAdmin);
+  } else {
+    res.status(404);
+    throw new Error("Admin not found");
+  }
+});
