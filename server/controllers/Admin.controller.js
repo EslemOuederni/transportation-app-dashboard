@@ -12,10 +12,10 @@ const generateToken = (id) => {
 
 // register a new admin
 module.exports.register = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, phoneNumber } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   // validate the data
-  if (!firstName || !lastName || !email || !password || !phoneNumber) {
+  if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({
       message: "Please fill all the fields",
     });
@@ -37,7 +37,6 @@ module.exports.register = asyncHandler(async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
-    phoneNumber,
   });
   // save the admin
   if (newAdmin) {
@@ -51,7 +50,6 @@ module.exports.register = asyncHandler(async (req, res) => {
         firstName: newAdmin.firstName,
         lastName: newAdmin.lastName,
         email: newAdmin.email,
-        phoneNumber: newAdmin.phoneNumber,
         token: generateToken(newAdmin._id),
       });
   } else {
@@ -87,7 +85,6 @@ module.exports.login = asyncHandler(async (req, res) => {
         firstName: currentAdmin.firstName,
         lastName: currentAdmin.lastName,
         email: currentAdmin.email,
-        phoneNumber: currentAdmin.phoneNumber,
         token: generateToken(currentAdmin._id),
       });
   } else {
