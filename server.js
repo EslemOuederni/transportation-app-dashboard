@@ -1,22 +1,24 @@
 const express = require("express");
-const { auth } = require("express-openid-connect");
-const app = express();
+const router = require("./server/routes/index.routes");
+const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
+const app = express();
 
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: process.env.SECRET,
-  baseURL: process.env.BASE_URL,
-  clientID: process.env.CLIENT_ID,
-  issuerBaseURL: process.env.ISSUER,
-};
+//middlewares
+app.use(express.json());
+app.use(cors());
+//routes
+app.use(router);
 
-app.use(auth(config));
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    // listen for requests
+    app.listen(3000, () => {
+      console.log("connected to db & listening on port", 3000);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
