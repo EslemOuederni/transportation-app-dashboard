@@ -10,10 +10,12 @@ const {
   getAll,
 } = require("../controllers/Admin.controller");
 
+const { auth } = require("../middleware/authentication.middleware");
+
 adminRouter.post("/login", login);
 adminRouter.post("/register", register);
 adminRouter.get("/logout", logout);
-adminRouter.get("/getOneAdmin", getOne);
-adminRouter.get("/getAllAdmins", getAll);
+adminRouter.get("/getOneAdmin", auth, getOne);
+adminRouter.get("/getAllAdmins", auth, getAll);
 
 module.exports = adminRouter;

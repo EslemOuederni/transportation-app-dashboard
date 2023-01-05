@@ -106,7 +106,7 @@ module.exports.getAll = asyncHandler(async (req, res) => {
 });
 // get a single admin
 module.exports.getOne = asyncHandler(async (req, res) => {
-  const getAdmin = await admin.findById(req.body);
+  const getAdmin = await admin.findById(req.admin._id);
   if (getAdmin) {
     res.json(getAdmin);
   } else {
