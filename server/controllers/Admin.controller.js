@@ -20,6 +20,19 @@ module.exports.register = asyncHandler(async (req, res) => {
       message: "Please fill all the fields",
     });
   }
+  // validate email
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({
+      message: "Please enter a valid email",
+    });
+  }
+  //strong password
+  if (!validator.isStrongPassword(password)) {
+    return res.status(400).json({
+      message:
+        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
+    });
+  }
   // check if the email is already registered
   const adminAlreadyRegistered = await admin.findOne({ email });
   if (adminAlreadyRegistered) {
@@ -66,19 +79,7 @@ module.exports.login = asyncHandler(async (req, res) => {
       message: "Please fill all the fields",
     });
   }
-  // validate email
-  if (!validator.isEmail(email)) {
-    return res.status(400).json({
-      message: "Please enter a valid email",
-    });
-  }
-  //strong password
-  if (!validator.isStrongPassword(password)) {
-    return res.status(400).json({
-      message:
-        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
-    });
-  }
+
   // check if the email is already registered
   const currentAdmin = await admin.findOne({ email });
   if (!currentAdmin) {
