@@ -17,6 +17,7 @@
     "express-async-handler": "^1.2.0",
     "express-openid-connect": "^2.11.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.1"
+    "mongoose": "^6.8.1",
+    "validator": "^13.7.0"
   }
 }

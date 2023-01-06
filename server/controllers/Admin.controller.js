@@ -2,7 +2,7 @@ const admin = require("../models/Admin.Model");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const validator = require("validator");
 // generate a token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -64,6 +64,19 @@ module.exports.login = asyncHandler(async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({
       message: "Please fill all the fields",
+    });
+  }
+  // validate email
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({
+      message: "Please enter a valid email",
+    });
+  }
+  //strong password
+  if (!validator.isStrongPassword(password)) {
+    return res.status(400).json({
+      message:
+        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
     });
   }
   // check if the email is already registered
