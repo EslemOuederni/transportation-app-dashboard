@@ -22,7 +22,8 @@ const LoginPage = () => {
           console.log(res.status);
           if (res.status === 201) {
             console.log("success");
-            navigate("/home");
+            localStorage.setItem("token", res.data.token);
+            navigate("/dashboard/home");
           } else {
             console.log("error");
           }
