@@ -1,48 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { SlArrowDown } from "react-icons/sl";
 import { useAuth } from "../Hooks/useAuth";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import DropDownMenu from "./DropDownMenu";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 const Header = () => {
-  const { _id, firstName, fetchCurrentUser } = useAuth();
-  const navigation = useNavigate();
-
-  fetchCurrentUser();
+  const { firstName, fetchCurrentUser } = useAuth();
+  const [time, setTime] = useState("Good Morning");
+  const [icon, setIcon] = useState(
+    <SunIcon className="w-6 h-6 text-yellow-300" />
+  );
   useEffect(() => {
     fetchCurrentUser();
   }, []);
+  useEffect(() => {
+    const date = new Date();
+    const hours = date.getHours();
+    if (hours < 12) {
+      setTime("Good Morning");
+      setIcon(<SunIcon className="w-6 h-6 text-yellow-300" />);
+    } else if (hours >= 12 && hours <= 17) {
+      setTime("Good Afternoon");
+      setIcon(<SunIcon className="w-6 h-6 text-yellow-300" />);
+    } else if (hours >= 17 && hours <= 24) {
+      setTime("Good Evening");
+      setIcon(<MoonIcon className="w-6 h-6 text-gray-300" />);
+    }
+  }, []);
 
-  const handleLogout = async () => {
-    try {
-      await axios.get("http://localhost:3000/api/admin/logout", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      localStorage.removeItem("token");
-      navigation("/auth/login");
-    } catch (error) {}
-  };
   return (
-    <div className=" w-[700px] lg:w-[1050px] h-[100px] mx-[300px]">
+    <div className="w-[900px] lg:w-[1550px] h-[100px] mx-[300px] border-b-[1px] border-gray-300">
       <div className=" flex flex-row items-center justify-between pt-[34px]">
-        <div>
-          <p className=" font-bold text-2xl ml-8">Good Morning</p>
+        <div className="flex flex-row items-center ">
+          <p className="font-bold text-2xl ml-8 ">{time}</p>
+          <div className=" ml-2">{icon}</div>
         </div>
-        <div>
-          <h5 className="flex flex-row items-center font-bold text-xl capitalize">
+        <div className="flex flex-row items-center">
+          <h5 className="flex flex-row items-center font-semibold text-xl capitalize">
             <IoIosNotificationsOutline
               className="mr-10 cursor-pointer"
               size={26}
             />
             {firstName}
-            <SlArrowDown size={14} className=" ml-2 cursor-pointer" />
+            <DropDownMenu />
           </h5>
-        </div>
-        <div>
-          <button onClick={handleLogout}>logout</button>
         </div>
       </div>
     </div>
