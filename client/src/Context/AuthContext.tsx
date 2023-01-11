@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 export interface IUser {
   _v: number;
@@ -39,7 +39,7 @@ export const CurrentUserProvider = ({ children }: AuthProviderProps) => {
 
   const fetchCurrentUser = async () => {
     try {
-      axios
+      await axios
         .get("http://localhost:3000/api/admin/getOneAdmin", {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -61,3 +61,6 @@ export const CurrentUserProvider = ({ children }: AuthProviderProps) => {
     </CurrentUserContext.Provider>
   );
 };
+export function useAuth() {
+  return useContext<IUserType>(CurrentUserContext);
+}
