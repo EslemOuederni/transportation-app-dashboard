@@ -5,6 +5,11 @@ import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 import NavBar from "./Components/NavBar";
 import Protected from "./Components/Protected";
+import ProfilePage from "./Pages/ProfilePage";
+import UsersPage from "./Pages/UsersPage";
+import Header from "./Components/Header";
+import TicketsPage from "./Pages/TicketsPage";
+import TransportPage from "./Pages/TransportPage";
 const LoginContainer = () => {
   return (
     <Routes>
@@ -17,8 +22,13 @@ const DefaultContainer = () => {
   return (
     <>
       <NavBar />
+      <Header />
       <Routes>
         <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/tickets" element={<TicketsPage />} />
+        <Route path="/transport" element={<TransportPage />} />
       </Routes>
     </>
   );
