@@ -3,21 +3,14 @@ import { Fragment } from "react";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useLogout from "../Hooks/useSignOut";
 
 export default function DropDownMenu() {
   const navigation = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await axios.get("http://localhost:3000/api/admin/logout", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      localStorage.removeItem("token");
-      navigation("/auth/login");
-    } catch (error) {}
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout();
+    navigation("/auth/login");
   };
   return (
     <div className=" ml-3">
@@ -150,9 +143,9 @@ function DeleteInactiveIcon(props) {
       className="w-6 h-6"
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         fill="#8B5CF6"
         strokeWidth="2"
       />
@@ -169,9 +162,9 @@ function DeleteActiveIcon(props) {
       className="w-6 h-6"
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         fill="#C4B5FD"
         strokeWidth="2"
       />
