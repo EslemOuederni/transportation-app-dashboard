@@ -1,54 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import useSignUp from "../Hooks/useSignup";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [error, setError] = useState("");
 
-  const regexEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  const regexPassword =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
+  const { error, loading, signup } = useSignUp();
+
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email || !password || !firstName || !lastName) {
-      return setError("Please fill all the fields");
-    }
-    if (!regexEmail.test(email)) {
-      setError("");
-      return setError("Please enter a valid email");
-    }
-    console.log(regexPassword.test(password));
-
-    if (!regexPassword.test(password)) {
-      setError("");
-      return setError(
-        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character"
-      );
-    }
-    try {
-      console.log("try");
-      await axios
-        .post(
-          "http://localhost:3000/api/admin/register",
-          { email, password, firstName, lastName },
-          { headers: { "Access-Control-Allow-Origin": "*" } }
-        )
-        .then((res) => {
-          if (res.status === 201) {
-            console.log("success");
-            navigate("/auth/login");
-          } else {
-            console.log("error");
-          }
-        });
-    } catch (error) {}
+    signup(email, password, firstName, lastName);
   };
 
   return (
@@ -86,7 +53,10 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Last Name"
               />
-              <button className="bg-red-600 py-3 my-6 rounded font-bold">
+              <button
+                className="bg-red-600 py-3 my-6 rounded font-bold"
+                disabled={loading}
+              >
                 Sign Up
               </button>
               <div className="flex justify-between items-center text-sm text-gray-600">

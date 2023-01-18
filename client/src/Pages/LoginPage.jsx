@@ -1,38 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSignin } from "../Hooks/useSignIn";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { error, loading, signin } = useSignin();
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      await axios
-        .post(
-          "http://localhost:3000/api/admin/login",
-          { email, password },
-          { headers: { "Access-Control-Allow-Origin": "*" } }
-        )
-        .then((res) => {
-          console.log(res.data);
-          console.log(res.status);
-          if (res.status === 201) {
-            console.log("success");
-            localStorage.setItem("token", res.data.token);
-            navigate("/dashboard/home");
-          } else {
-            console.log("error");
-          }
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    await signin(email, password);
+    navigate("/dashboard/home");
   };
 
   return (
@@ -45,6 +25,11 @@ const LoginPage = () => {
               onSubmit={handleSubmit}
               className="w-full flex flex-col py-4 mb-4"
             >
+              {error && (
+                <div className="bg-red-600 p-3 rounded mb-4">
+                  <p className="text-sm">{error}</p>
+                </div>
+              )}
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 className="p-3 my-2 bg-gray-700 rounded"
@@ -58,7 +43,10 @@ const LoginPage = () => {
                 type="password"
                 placeholder="password"
               />
-              <button className="bg-red-600 py-3 my-6 rounded font-bold">
+              <button
+                className="bg-red-600 py-3 my-6 rounded font-bold"
+                disabled={loading}
+              >
                 Sign In
               </button>
               <div className="flex justify-between items-center text-sm text-gray-600">
@@ -70,7 +58,7 @@ const LoginPage = () => {
               </div>
               <p className="py-8">
                 <span className="text-gray-600">New Here ?</span>{" "}
-                <Link to="/register">Sign Up</Link>
+                <Link to="/auth/register">Sign Up</Link>
               </p>
             </form>
           </div>
