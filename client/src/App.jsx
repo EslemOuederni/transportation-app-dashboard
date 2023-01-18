@@ -6,6 +6,8 @@ import HomePage from "./Pages/HomePage";
 import NavBar from "./Components/NavBar";
 import Protected from "./Components/Protected";
 import Header from "./Components/Header";
+import ProfilePage from "./Pages/ProfilePage";
+import TicketsPage from "./Pages/TicketsPage";
 
 const LoginContainer = () => {
   return (
@@ -21,11 +23,18 @@ const DefaultContainer = () => {
       <NavBar />
       <Header />
       <Routes>
-        <Route path="/home" element={<HomePage />} />
-        {/* <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/users" element={<UsersPage />} />
+        <Route
+          path="/home"
+          element={
+            <Protected>
+              <HomePage />
+            </Protected>
+          }
+        />
+        <Route path="/profile" element={<ProfilePage />} />
+        {/* <Route path="/users" element={<UsersPage />} /> */}
         <Route path="/tickets" element={<TicketsPage />} />
-        <Route path="/transport" element={<TransportPage />} /> */}
+        {/* <Route path="/transport" element={<TransportPage />} /> */}
       </Routes>
     </>
   );
