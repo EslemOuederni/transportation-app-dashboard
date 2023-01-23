@@ -4,6 +4,7 @@ const transportRouter = express.Router();
 
 const {
   getTransports,
+  getTransportsByTransportMean,
   getTransport,
   addTransport,
   updateTransport,
@@ -11,6 +12,7 @@ const {
 } = require("../controllers/Transport.controller");
 
 transportRouter.get("/", getTransports);
+transportRouter.get("/transportMean", getTransportsByTransportMean);
 transportRouter.get("/:id", getTransport);
 transportRouter.post("/", addTransport);
 transportRouter.patch("/:id", updateTransport);

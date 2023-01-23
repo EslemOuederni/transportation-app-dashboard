@@ -1,9 +1,20 @@
-const transport = require("../models/transport.Model");
+const transport = require("../models/Transport.Model");
 
 // GET all transports
 module.exports.getTransports = async (req, res) => {
   try {
     const transports = await transport.find({}).sort({ createdAt: -1 });
+    res.json(transports);
+  } catch (error) {
+    res.json({ message: error });
+  }
+};
+
+// GET all transports by transportMean
+module.exports.getTransportsByTransportMean = async (req, res) => {
+  const { transportMean } = req.body;
+  try {
+    const transports = await transport.find({ transportMean });
     res.json(transports);
   } catch (error) {
     res.json({ message: error });

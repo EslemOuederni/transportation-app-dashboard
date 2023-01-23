@@ -8,6 +8,8 @@ import Protected from "./Components/Protected";
 import Header from "./Components/Header";
 import ProfilePage from "./Pages/ProfilePage";
 import TicketsPage from "./Pages/TicketsPage";
+import TransportPage from "./Pages/TransportPage";
+import AddVehicule from "./Pages/AddVehicule";
 
 const LoginContainer = () => {
   return (
@@ -34,7 +36,8 @@ const DefaultContainer = () => {
         <Route path="/profile" element={<ProfilePage />} />
         {/* <Route path="/users" element={<UsersPage />} /> */}
         <Route path="/tickets" element={<TicketsPage />} />
-        {/* <Route path="/transport" element={<TransportPage />} /> */}
+        <Route path="/transport" element={<TransportPage />} />
+        <Route path="/transport/addVehicule" element={<AddVehicule />} />
       </Routes>
     </>
   );
