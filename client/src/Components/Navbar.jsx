@@ -20,10 +20,12 @@ const NavBar = () => {
             <NavItem
               name="Dashboard"
               icon={<RiDashboardLine className="mr-2" size={24} />}
+              navigation="/dashboard/home"
             />
             <NavItem
               name="My Profile"
               icon={<HiOutlineUserCircle className="mr-2" size={24} />}
+              navigation="/dashboard/profile"
             />
             <NavItem
               name="Users"
@@ -36,10 +38,12 @@ const NavBar = () => {
             <NavItem
               name="Tickets"
               icon={<HiOutlineTicket className="mr-2" size={24} />}
+              navigation="/dashboard/tickets"
             />
             <NavItem
               name="Transport"
               icon={<RiBusLine className="mr-2" size={24} />}
+              navigation="/dashboard/transport"
             />
           </div>
         </div>
