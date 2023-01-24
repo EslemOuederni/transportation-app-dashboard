@@ -45,6 +45,11 @@ const NavBar = () => {
               icon={<RiBusLine className="mr-2" size={24} />}
               navigation="/dashboard/transport"
             />
+            <NavItem
+              name="Trips"
+              icon={<RiBusLine className="mr-2" size={24} />}
+              navigation="/dashboard/trips"
+            />
           </div>
         </div>
       </div>
