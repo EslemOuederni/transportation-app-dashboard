@@ -18,10 +18,10 @@ const Header = () => {
     if (hours < 12) {
       setTime("Good Morning");
       setIcon(<SunIcon className="w-6 h-6 text-yellow-300" />);
-    } else if (hours >= 12 && hours <= 17) {
+    } else if (hours >= 12 && hours <= 16) {
       setTime("Good Afternoon");
       setIcon(<SunIcon className="w-6 h-6 text-yellow-300" />);
-    } else if (hours >= 17 && hours <= 24) {
+    } else if (hours >= 16 && hours <= 24) {
       setTime("Good Evening");
       setIcon(<MoonIcon className="w-6 h-6 text-gray-300" />);
     }
