@@ -10,6 +10,7 @@ import ProfilePage from "./Pages/ProfilePage";
 import TicketsPage from "./Pages/TicketsPage";
 import TransportPage from "./Pages/TransportPage";
 import AddVehicule from "./Pages/AddVehicule";
+import TripsPage from "./Pages/TripsPage";
 
 const LoginContainer = () => {
   return (
@@ -38,6 +39,7 @@ const DefaultContainer = () => {
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="/transport" element={<TransportPage />} />
         <Route path="/transport/addVehicule" element={<AddVehicule />} />
+        <Route path="/trips" element={<TripsPage />} />
       </Routes>
     </>
   );

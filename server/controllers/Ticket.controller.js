@@ -1,5 +1,5 @@
 const Ticket = require("../models/Ticket.Model");
-
+const Trip = require("../models/Trip.Model");
 // GET all tickets
 module.exports.getTickets = async (req, res) => {
   try {
@@ -23,36 +23,26 @@ module.exports.getTicket = async (req, res) => {
 
 // POST a ticket
 module.exports.postTicket = async (req, res) => {
-  const {
-    transport,
-    user,
-    price,
-    quantity,
-    totalPrice,
-    departureDate,
-    arrivalDate,
-    departureTime,
-    arrivalTime,
-    departureLocation,
-    arrivalLocation,
-    status,
-  } = req.body;
+  const { transport, user, trip, price, quantity, totalPrice, status } =
+    req.body;
   try {
     const newTicket = new Ticket({
       transport,
       user,
       price,
+      trip,
       quantity,
       totalPrice,
-      departureDate,
-      arrivalDate,
-      departureTime,
-      arrivalTime,
-      departureLocation,
-      arrivalLocation,
       status,
     });
+
     const ticket = await newTicket.save();
+    const totalT = await Trip.findOneAndUpdate(
+      { _id: trip },
+      { $inc: { numberOfTickets: -quantity } }
+    );
+    totalT.save();
+    console.log(totalT);
     res.status(200).json(ticket);
   } catch (error) {
     res.status(400).json({ message: error });

@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TicketSchema = new Schema({
-  transport: {
-    type: Schema.Types.ObjectId,
-    ref: "transport",
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "admin",
+  },
+  trip: {
+    type: Schema.Types.ObjectId,
+    ref: "trip",
   },
   price: {
     type: Number,
@@ -21,41 +21,13 @@ const TicketSchema = new Schema({
   totalPrice: {
     type: Number,
     required: true,
-  },
-  departureDate: {
-    type: Date,
-    required: true,
-  },
-  arrivalDate: {
-    type: Date,
-    required: true,
-  },
-  departureTime: {
-    type: String,
-    required: true,
-  },
-  arrivalTime: {
-    type: String,
-    required: true,
-  },
-  departureLocation: {
-    type: String,
-    required: true,
-  },
-  arrivalLocation: {
-    type: String,
-    required: true,
+    default: function () {
+      return this.price * this.quantity;
+    },
   },
   status: {
     type: String,
-    enum: [
-      "Scheduled",
-      "Departed",
-      "Arrived",
-      "Delayed",
-      "Cancelled",
-      "Completed",
-    ],
+    enum: ["Booked", "Terminated"],
     required: true,
   },
   createdAt: {
