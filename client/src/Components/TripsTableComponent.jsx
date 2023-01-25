@@ -1,22 +1,22 @@
 import React from "react";
 
-const TableComponent = ({ data }) => {
+const TripsTableComponent = ({ data }) => {
   return (
     <table className=" w-[700px] text-left text-gray-100  mt-4 p-10 text-lg">
       <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
         <tr>
-          <th className="px-6 py-3">Registeration Number</th>
-          <th className="px-6 py-3">Capacity</th>
-          <th className="px-6 py-3">Description</th>
+          <th className="px-6 py-3">From</th>
+          <th className="px-6 py-3">To</th>
+          <th className="px-6 py-3">Nbr of Tickets</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
         {data.map((item, index) => (
           <tr className="bg-white border-b" key={index}>
-            <td className="px-6 py-3">{item.registrationNumber}</td>
-            <td className="px-6 py-3">{item.capacity}</td>
-            <td className="px-6 py-3">{item.description}</td>
+            <td>{item.departureCity.name} </td>
+            <td className="px-6 py-3">{item.arrivalCity.name}</td>
+            <td className="px-6 py-3">{item.numberOfTickets}</td>
             <td className="flex flex-row items-center py-3 px-6">
               <button>
                 <svg
@@ -59,4 +59,4 @@ const TableComponent = ({ data }) => {
   );
 };
 
-export default TableComponent;
+export default TripsTableComponent;
