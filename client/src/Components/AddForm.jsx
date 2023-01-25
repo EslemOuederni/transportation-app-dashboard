@@ -1,42 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Input from "./Input";
 
-const AddForm = () => {
-  const transportationMean = ["car", "bus", "train", "plane"];
-  const [transportMean, setTransport] = useState(transportationMean[0]);
-  const [registrationNumber, setRegistrationNumber] = useState("");
-  const [capacity, setCapacity] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const vehicule = {
-      transportMean,
-      registrationNumber,
-      capacity,
-      description,
-    };
-    console.log(vehicule);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/transport/",
-        vehicule,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response);
-      if (response.status === 200 || response.status === 201) {
-        console.log("vehicule added");
-      }
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
-  };
-
+const AddForm = ({
+  transportationMean,
+  registrationNumber,
+  capacity,
+  description,
+  handleSubmit,
+  setCapacity,
+  setDescription,
+  setRegistrationNumber,
+  setTransport,
+}) => {
   return (
     <div className=" ml-[300px] flex flex-col md:ml-[400px] lg:mx-[450px] lg:p-3">
       <h1 className=" font-semibold text-2xl mb-3">Add Form</h1>
@@ -52,29 +29,23 @@ const AddForm = () => {
             </option>
           ))}
         </select>
-        <span className="text-xs text-gray-500">
-          you selected {transportMean}
-        </span>
-        <label className="py-2"> Registration Number</label>
-        <input
+        <Input
+          name="Registration Number"
           type="text"
           value={registrationNumber}
           onChange={(e) => setRegistrationNumber(e.target.value)}
-          className=" px-4 py-2 rounded-md uppercase font-semibold"
         />
-        <label className="py-2"> Capacity</label>
-        <input
+        <Input
+          name="Capacity"
           type="number"
+          value={capacity}
           min={1}
           max={60}
-          value={capacity}
           onChange={(e) => setCapacity(e.target.value)}
-          className=" px-4 py-2 rounded-md uppercase font-semibold"
         />
-        <label className="py-2"> Description</label>
-        <input
+        <Input
+          name="Description"
           type="text"
-          className=" px-4 py-2 rounded-md font-semibold"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
