@@ -36,7 +36,8 @@ const TripSchema = new Schema({
       "Cancelled",
       "Completed",
     ],
-    required: true,
+    required: false,
+    default: "Scheduled",
   },
   distance: {
     type: Number,

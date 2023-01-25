@@ -40,13 +40,11 @@ exports.createTrip = async (req, res) => {
     departureDate,
     arrivalDate,
     numberOfTickets,
-    status,
     departureCity,
     arrivalCity,
   } = req.body;
   const depCity = await City.findOne({ name: departureCity });
   const arrCity = await City.findOne({ name: arrivalCity });
-  console.log(depCity);
   var distance = calculateDistance(depCity, arrCity);
 
   try {
@@ -57,7 +55,6 @@ exports.createTrip = async (req, res) => {
       departureCity: depCity,
       arrivalCity: arrCity,
       numberOfTickets,
-      status,
       distance,
     });
     if (newTrip !== null) {
