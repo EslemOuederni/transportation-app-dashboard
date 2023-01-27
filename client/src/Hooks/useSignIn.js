@@ -20,7 +20,6 @@ export const useSignin = () => {
         )
         .then((res) => {
           if (res.status === 201) {
-            console.log(JSON.stringify(res.data));
             localStorage.setItem("user", JSON.stringify(res.data));
             dispatch({ type: "LOGIN", payload: JSON.stringify(res.data) });
             setLoading(false);
