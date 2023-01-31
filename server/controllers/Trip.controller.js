@@ -45,11 +45,13 @@ exports.createTrip = async (req, res) => {
   } = req.body;
   const depCity = await City.findOne({ name: departureCity });
   const arrCity = await City.findOne({ name: arrivalCity });
+  const transportMean = await Transport.findOne({ transportMean: transport });
+  console.log(transportMean);
   var distance = calculateDistance(depCity, arrCity);
 
   try {
     const newTrip = new Trip({
-      transport,
+      transport: transportMean,
       departureDate,
       arrivalDate,
       departureCity: depCity,
@@ -57,6 +59,7 @@ exports.createTrip = async (req, res) => {
       numberOfTickets,
       distance,
     });
+    console.log(newTrip);
     if (newTrip !== null) {
       distance = calculateDistance(departureCity, arrivalCity);
       const trip = await newTrip.save();
@@ -72,11 +75,26 @@ exports.createTrip = async (req, res) => {
 
 exports.getAllTrips = async (req, res) => {
   try {
-    const trips = await Trip.find()
+    const trips = await Trip.find({})
       .populate("transport")
       .populate("departureCity")
       .populate("arrivalCity");
     res.status(200).json(trips);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// get one trip
+
+exports.getOneTrip = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const trip = await Trip.findById(id)
+      .populate("transport")
+      .populate("departureCity")
+      .populate("arrivalCity");
+    res.status(200).json(trip);
   } catch (error) {
     res.status(500).json(error);
   }

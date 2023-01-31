@@ -4,8 +4,9 @@ import Input from "../Components/Input";
 import { useEffect } from "react";
 import axios from "axios";
 const AddTrip = () => {
-  const transportationMean = ["Bus", "Train", "Plane", "Car"];
+  const transportationMean = ["car", "bus", "train", "plane"];
   const [transport, setTransport] = useState(transportationMean[0]);
+  const [registrationNumber, setRegistrationNumber] = useState([]);
   const [departureDate, setDepartureDate] = useState(new Date());
   const [arrivalDate, setArrivalDate] = useState(new Date());
   const [departureCity, setDepartureCity] = useState(null);
@@ -20,11 +21,22 @@ const AddTrip = () => {
     });
   };
   useEffect(() => {
+    const getTransportation = () => {
+      axios
+        .get(`http://localhost:3000/api/transport/?transportMean=${transport}`)
+        .then((res) => {
+          setRegistrationNumber([...res.data]);
+        });
+    };
+    getTransportation();
+  }, [transport]);
+
+  useEffect(() => {
     getCities();
   }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(transport);
     const trip = {
       transport,
       departureDate,
@@ -35,10 +47,13 @@ const AddTrip = () => {
       numberOfTickets,
     };
     console.log(trip);
-    let response = axios
+    axios
       .post("http://localhost:3000/api/trip/", trip)
       .then((res) => {
         console.log(res.data);
+        if (res.status === 200) {
+          alert("Trip added successfully");
+        }
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -56,6 +71,14 @@ const AddTrip = () => {
           {transportationMean.map((item, index) => (
             <option className="" key={index}>
               {item}
+            </option>
+          ))}
+        </select>
+        <label className="py-2"> Registration Number </label>
+        <select>
+          {registrationNumber.map((item, index) => (
+            <option className="" key={index}>
+              {item.registrationNumber}
             </option>
           ))}
         </select>

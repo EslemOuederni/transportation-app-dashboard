@@ -5,6 +5,7 @@ module.exports.getTransports = async (req, res) => {
   try {
     const transports = await transport.find({}).sort({ createdAt: -1 });
     res.json(transports);
+    console.log(transports);
   } catch (error) {
     res.json({ message: error });
   }
@@ -12,9 +13,11 @@ module.exports.getTransports = async (req, res) => {
 
 // GET all transports by transportMean
 module.exports.getTransportsByTransportMean = async (req, res) => {
-  const { transportMean } = req.body;
+  const { transportMean } = req.params;
   try {
-    const transports = await transport.find({ transportMean });
+    const transports = await transport.findOne({
+      transportMean: transportMean,
+    });
     res.json(transports);
   } catch (error) {
     res.json({ message: error });
@@ -24,7 +27,7 @@ module.exports.getTransportsByTransportMean = async (req, res) => {
 // GET a transport
 module.exports.getTransport = async (req, res) => {
   try {
-    const transportFound = await transport.findById(req.transport._id);
+    const transportFound = await transport.findById(req.params.id);
     res.json(transportFound);
   } catch (error) {
     res.json({ message: error });

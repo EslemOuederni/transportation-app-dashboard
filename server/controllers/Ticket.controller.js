@@ -4,8 +4,17 @@ const mongoose = require("mongoose");
 
 // GET all tickets
 module.exports.getTickets = async (req, res) => {
+  const cities = [
+    { path: "trip", populate: { path: "departureCity" } },
+    { path: "trip", populate: { path: "arrivalCity" } },
+  ];
   try {
-    const tickets = await Ticket.find({}).sort({ createdAt: -1 });
+    const tickets = await Ticket.find({})
+      .populate("user")
+      .populate("trip")
+      .populate(cities)
+      .lean()
+      .sort({ createdAt: -1 });
     res.status(200).json(tickets);
   } catch (error) {
     res.status(400).json({ message: error });
@@ -16,7 +25,7 @@ module.exports.getTickets = async (req, res) => {
 module.exports.getTicket = async (req, res) => {
   const { id } = req.body;
   try {
-    const ticket = await Ticket.findbyId(id);
+    const ticket = await Ticket.findbyId(id).populate("user").populate("trip");
     res.status(200).json(ticket);
   } catch (error) {
     res.status(400).json({ message: error });

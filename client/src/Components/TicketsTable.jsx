@@ -1,12 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useReducer } from "react";
-import { useEffect } from "react";
 
 function TicketsTable({ data, setData }) {
-  const [reduceValue, forceUpdate] = useReducer((x) => x + 1, 0);
-
-  const handleDelet = (id) => {
+  const handleDelete = (id) => {
     axios
       .delete("http://localhost:3000/api/ticket/" + id)
       .then((response) => {
@@ -17,10 +14,6 @@ function TicketsTable({ data, setData }) {
       });
   };
 
-  useEffect(() => {
-    handleDelet();
-  }, []);
-
   return (
     <table className=" table-auto w-[700px]  text-left m-8  mx-40 p-10 text-lg">
       <thead className=" text-lg uppercase text-gray-300 bg-blue-600 bg-slate-500 mx-10 px-10">
@@ -28,25 +21,27 @@ function TicketsTable({ data, setData }) {
           <th className=" px-6 py-3">user</th>
           <th className="px-6 -py-3">trip</th>
           <th className="px-6 py-3">price</th>
-          <th className="px-6 py-3">quntity</th>
+          <th className="px-6 py-3">quantity</th>
           <th className="px-6 py-3">total-price</th>
           <th className="px-6 py-3">status</th>
-          <th className="px-6 py-3">date</th>
           <th className="px-6 py-3">action</th>
         </tr>
       </thead>
       <tbody className=" border-b bg-slate-700 dark:border-gray-700 dark:text-white">
         {data.map((items, index) => (
           <tr className=" border-b" key={items._id.toString()}>
-            <td className="px-6 py-3">{items.user}</td>
-            <td className="px-6 py-3">{items.trip}</td>
+            <td className="px-6 py-3">
+              {items.user.firstName} {items.user.lastName}
+            </td>
+            <td className="px-6 py-3">
+              {items.trip.departureCity.name} - {items.trip.arrivalCity.name}
+            </td>
             <td className="px-6 py-3">{items.price}</td>
             <td className="px-6 py-3">{items.quantity}</td>
             <td className="px-6 py-3">{items.totalPrice}</td>
             <td className="px-6 py-3">{items.status}</td>
-            <td className="px-6 py-3">{items.createdAt}</td>
             <td className="flex flex-row px-6  py-7">
-              <button onClick={(e) => handleDelet(items._id)}>
+              <button onClick={(e) => handleDelete(items._id)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

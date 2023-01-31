@@ -14,6 +14,7 @@ const TicketsPage = () => {
       if (response.ok) {
         setData(json);
       }
+      console.log(json);
     };
 
     fetchData();
