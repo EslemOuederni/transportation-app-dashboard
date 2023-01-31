@@ -8,6 +8,7 @@ function TicketsTable({ data, setData }) {
       .delete("http://localhost:3000/api/ticket/" + id)
       .then((response) => {
         console.log(response.data);
+        setData(data.filter((el) => el._id !== id));
       })
       .catch((error) => {
         console.log(error);
