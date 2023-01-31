@@ -1,5 +1,7 @@
 const Ticket = require("../models/Ticket.Model");
 const Trip = require("../models/Trip.Model");
+const mongoose = require("mongoose");
+
 // GET all tickets
 module.exports.getTickets = async (req, res) => {
   try {
@@ -62,9 +64,12 @@ module.exports.updateTicket = async (req, res) => {
 
 // DELETE a ticket
 module.exports.deleteTicket = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No ticket with this ID" });
+  }
   try {
-    const ticket = await Ticket.findByIdAndDelete(id);
+    const ticket = await Ticket.findByIdAndDelete({ _id: id });
     res.status(200).json(ticket);
   } catch (error) {
     res.status(400).json({ message: error });

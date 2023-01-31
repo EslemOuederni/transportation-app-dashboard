@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 const TicketsPage = () => {
   const [data, setData] = useState([]);
- 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +21,7 @@ const TicketsPage = () => {
 
   return (
     <div className=" ml-[300px] ">
-      <TicketsTable data={data} />
+      <TicketsTable data={data} setData={setData} />
     </div>
   );
 };
