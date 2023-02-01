@@ -39,35 +39,39 @@ exports.createTrip = async (req, res) => {
     transport,
     departureDate,
     arrivalDate,
-    numberOfTickets,
     departureCity,
     arrivalCity,
+    price,
   } = req.body;
   const depCity = await City.findOne({ name: departureCity });
   const arrCity = await City.findOne({ name: arrivalCity });
-  const transportMean = await Transport.findOne({ transportMean: transport });
-  console.log(transportMean);
+  const transportId = await Transport.findOne({ _id: transport });
+  console.log(transportId.transportMean);
   var distance = calculateDistance(depCity, arrCity);
-
+  console.log("id : ", transportId._id);
+  console.log("capacity : ", transportId.capacity);
+  var numberOfTickets = transportId.capacity;
   try {
     const newTrip = new Trip({
-      transport: transportMean,
+      transport: transportId._id,
       departureDate,
       arrivalDate,
       departureCity: depCity,
       arrivalCity: arrCity,
-      numberOfTickets,
       distance,
+      price,
+      numberOfTickets,
     });
-    console.log(newTrip);
     if (newTrip !== null) {
+      console.log("capacity : ", transportId.capacity);
+      numberOfTickets = transportId.capacity;
+      console.log("nbr : ", numberOfTickets);
       distance = calculateDistance(departureCity, arrivalCity);
       const trip = await newTrip.save();
       res.status(200).json(trip);
-      console.log(distance);
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(400).json({ message: error.message });
   }
 };
 

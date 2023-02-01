@@ -22,7 +22,7 @@ const TripSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "city",
   },
-  numberOfTickets: {
+  price: {
     type: Number,
     required: true,
   },
@@ -40,6 +40,11 @@ const TripSchema = new Schema({
     default: "Scheduled",
   },
   distance: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  numberOfTickets: {
     type: Number,
     required: false,
     default: 0,
