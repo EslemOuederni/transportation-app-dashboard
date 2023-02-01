@@ -34,16 +34,17 @@ module.exports.getTicket = async (req, res) => {
 
 // POST a ticket
 module.exports.postTicket = async (req, res) => {
-  const { transport, user, trip, price, quantity, totalPrice, status } =
-    req.body;
+  const { user, trip, quantity, status } = req.body;
+  const p = await Trip.findOne({ _id: trip });
+  console.log(p);
+  const price = p.price;
+  console.log(price);
   try {
     const newTicket = new Ticket({
-      transport,
       user,
-      price,
       trip,
       quantity,
-      totalPrice,
+      totalPrice: price * quantity,
       status,
     });
 

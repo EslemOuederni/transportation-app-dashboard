@@ -10,20 +10,14 @@ const TicketSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "trip",
   },
-  price: {
-    type: Number,
-    required: true,
-  },
   quantity: {
     type: Number,
     required: true,
   },
   totalPrice: {
     type: Number,
-    required: true,
-    default: function () {
-      return this.price * this.quantity;
-    },
+    required: false,
+    default: 0,
   },
   status: {
     type: String,
