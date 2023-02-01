@@ -1,4 +1,22 @@
 const transport = require("../models/Transport.Model");
+const mongoose = require("mongoose");
+
+// GET a transport
+module.exports.getOneTransport = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such transport" });
+  }
+
+  const oneTransport = await transport.findById(id);
+
+  if (!oneTransport) {
+    return res.status(404).json({ error: "No such workout" });
+  }
+
+  res.status(200).json(oneTransport);
+};
 
 // GET all transports
 module.exports.getTransports = async (req, res) => {
@@ -19,16 +37,6 @@ module.exports.getTransportsByTransportMean = async (req, res) => {
       transportMean: transportMean,
     });
     res.json(transports);
-  } catch (error) {
-    res.json({ message: error });
-  }
-};
-
-// GET a transport
-module.exports.getTransport = async (req, res) => {
-  try {
-    const transportFound = await transport.findById(req.params.id);
-    res.json(transportFound);
   } catch (error) {
     res.json({ message: error });
   }

@@ -5,15 +5,15 @@ const transportRouter = express.Router();
 const {
   getTransports,
   getTransportsByTransportMean,
-  getTransport,
+  getOneTransport,
   addTransport,
   updateTransport,
   deleteTransport,
 } = require("../controllers/Transport.controller");
 
-transportRouter.get("/", getTransports);
+transportRouter.get("/:id", getOneTransport);
 transportRouter.get("/:transportMean", getTransportsByTransportMean);
-transportRouter.get("/:id", getTransport);
+transportRouter.get("/", getTransports);
 transportRouter.post("/", addTransport);
 transportRouter.patch("/:id", updateTransport);
 transportRouter.delete("/:id", deleteTransport);
