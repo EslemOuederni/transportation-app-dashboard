@@ -33,7 +33,7 @@ module.exports.getTransports = async (req, res) => {
 module.exports.getTransportsByTransportMean = async (req, res) => {
   const { transportMean } = req.params;
   try {
-    const transports = await transport.findOne({
+    const transports = await transport.find({
       transportMean: transportMean,
     });
     res.json(transports);

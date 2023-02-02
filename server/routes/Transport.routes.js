@@ -12,7 +12,7 @@ const {
 } = require("../controllers/Transport.controller");
 
 transportRouter.get("/:id", getOneTransport);
-transportRouter.get("/:transportMean", getTransportsByTransportMean);
+transportRouter.get("/mean/:transportMean", getTransportsByTransportMean);
 transportRouter.get("/", getTransports);
 transportRouter.post("/", addTransport);
 transportRouter.patch("/:id", updateTransport);
