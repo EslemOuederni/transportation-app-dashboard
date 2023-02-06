@@ -85,3 +85,21 @@ module.exports.deleteTicket = async (req, res) => {
     res.status(400).json({ message: error });
   }
 };
+
+// count tickets
+
+module.exports.countTickets = async (req, res) => {
+  const count = await Ticket.countDocuments();
+  res.status(200).json(count);
+};
+
+// count amount of money earned
+
+module.exports.countMoney = async (req, res) => {
+  const count = await Ticket.aggregate([
+    { $addFields: { total: "$totalPrice" } },
+    { $group: { _id: null, total: { $sum: "$total" } } },
+    { $project: { _id: 0 } },
+  ]);
+  res.status(200).json(count[0].total);
+};
