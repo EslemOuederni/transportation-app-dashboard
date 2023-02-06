@@ -136,3 +136,9 @@ exports.getUserProfile = async (req, res) => {
     throw new Error("User not found");
   }
 };
+
+// count users
+exports.countUsers = async (req, res) => {
+  const count = await User.countDocuments();
+  res.status(200).json(count);
+};
