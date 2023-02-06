@@ -11,9 +11,9 @@ const AddTrip = () => {
   const [arrivalDate, setArrivalDate] = useState(new Date());
   const [departureCity, setDepartureCity] = useState(null);
   const [arrivalCity, setArrivalCity] = useState(null);
-  const [status, setStatus] = useState("");
-  const [numberOfTickets, setNbrOfTickets] = useState(0);
+  const [price, setPrice] = useState(0);
   const [cities, setCities] = useState([]);
+  const [chosen, setChosen] = useState(null);
 
   const getCities = () => {
     axios.get("http://localhost:3000/api/city").then((res) => {
@@ -23,9 +23,15 @@ const AddTrip = () => {
   useEffect(() => {
     const getTransportation = () => {
       axios
-        .get(`http://localhost:3000/api/transport/?transportMean=${transport}`)
+        .get(`http://localhost:3000/api/transport/mean/${transport}`, {
+          headers: {
+            "access-control-allow-origin": "*",
+          },
+        })
         .then((res) => {
           setRegistrationNumber([...res.data]);
+          setChosen(res.data[0]._id);
+          console.log(res.data);
         });
     };
     getTransportation();
@@ -34,17 +40,19 @@ const AddTrip = () => {
   useEffect(() => {
     getCities();
   }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(transport);
+    console.log(chosen);
     const trip = {
-      transport,
+      transport: chosen,
+      registrationNumber,
       departureDate,
       arrivalDate,
       departureCity,
       arrivalCity,
-      status,
-      numberOfTickets,
+      price,
     };
     console.log(trip);
     axios
@@ -119,11 +127,10 @@ const AddTrip = () => {
           ))}
         </select>
         <Input
-          name="number of tickets"
+          name="Price"
           type="number"
-          value={numberOfTickets}
-          onChange={(e) => setNbrOfTickets(e.target.value)}
-          min="1"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
         />
         <button
           className=" mt-4 bg-blue-700 rounded-md px-4 py-2 text-white font-semibold mb-4"
