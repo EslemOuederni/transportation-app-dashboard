@@ -34,7 +34,8 @@ function TicketsTable({ data, setData }) {
               {items.user.firstName} {items.user.lastName}
             </td>
             <td className="px-6 py-3">
-              {items.trip.departureCity.name} - {items.trip.arrivalCity.name}
+              {items.trip == null ? `no data` : items.trip.departureCity.name} -{" "}
+              {items.trip == null ? `no data` : items.trip.arrivalCity.name}
             </td>
             <td className="px-6 py-3 text-center">{items.quantity}</td>
             <td className="px-6 py-3">{items.totalPrice}</td>
