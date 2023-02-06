@@ -1,24 +1,37 @@
 import React from "react";
+import axios from "axios";
+const TripsTableComponent = ({ data, setData }) => {
+  const handleDelete = (id) => {
+    console.log(id);
+    axios
+      .delete(`http://localhost:3000/api/trip/delete/${id}`)
+      .then((res) => {
+        console.log(res);
+        setData(data.filter((item) => item._id !== id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-const TripsTableComponent = ({ data }) => {
   return (
     <table className=" w-[700px] text-left text-gray-100  mt-4 p-10 text-lg">
-      <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+      <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 text-center">
         <tr>
           <th className="px-6 py-3">From</th>
           <th className="px-6 py-3">To</th>
-          <th className="px-6 py-3">Nbr of Tickets</th>
+          <th className=" py-3">N°Tickets</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
         {data.map((item, index) => (
           <tr className="bg-white border-b" key={index}>
-            <td>{item.departureCity.name} </td>
-            <td className="px-6 py-3">{item.arrivalCity.name}</td>
-            <td className="px-6 py-3">{item.numberOfTickets}</td>
-            <td className="flex flex-row items-center py-3 px-6">
-              <button>
+            <td className="text-center">{item.departureCity.name} </td>
+            <td className="text-center">{item.arrivalCity.name}</td>
+            <td className="text-center">{item.numberOfTickets}</td>
+            <td className="flex flex-row items-center justify-center py-3 px-6">
+              <button onClick={(e) => handleDelete(item._id)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

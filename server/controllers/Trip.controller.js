@@ -2,6 +2,7 @@ const Trip = require("../models/Trip.Model");
 const Transport = require("../models/Transport.Model");
 const { getOneCity } = require("../controllers/City.controllers");
 const City = require("../models/City.Model");
+const Ticket = require("../models/Ticket.Model");
 
 const toRadians = (degrees) => {
   return (degrees * Math.PI) / 180;
@@ -104,6 +105,58 @@ exports.getOneTrip = async (req, res) => {
       .populate("departureCity")
       .populate("arrivalCity");
     res.status(200).json(trip);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// update a trip
+
+exports.updateTrip = async (req, res) => {
+  const { id } = req.params;
+  const {
+    transport,
+    departureDate,
+    arrivalDate,
+    departureCity,
+    arrivalCity,
+    price,
+  } = req.body;
+
+  try {
+    const updatedTrip = await Trip.findByIdAndUpdate(
+      id,
+      {
+        transport,
+        departureDate,
+        arrivalDate,
+        departureCity,
+        arrivalCity,
+        price,
+      },
+      { new: true } // to return the updated document
+    );
+    res.status(200).json(updatedTrip);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// delete a trip
+
+exports.deleteTrip = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedTrip = await Trip.findByIdAndDelete(id);
+    console.log(id);
+    Ticket.remove({ trip: id }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Tickets deleted");
+      }
+    });
+    res.status(200).json(deletedTrip);
   } catch (error) {
     res.status(500).json(error);
   }
