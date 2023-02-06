@@ -21,9 +21,8 @@ function TicketsTable({ data, setData }) {
         <tr>
           <th className=" px-6 py-3">user</th>
           <th className="px-6 -py-3">trip</th>
-          <th className="px-6 py-3">price</th>
           <th className="px-6 py-3">quantity</th>
-          <th className="px-6 py-3">total-price</th>
+          <th className="px-6 py-3">price</th>
           <th className="px-6 py-3">status</th>
           <th className="px-6 py-3">action</th>
         </tr>
@@ -37,8 +36,7 @@ function TicketsTable({ data, setData }) {
             <td className="px-6 py-3">
               {items.trip.departureCity.name} - {items.trip.arrivalCity.name}
             </td>
-            <td className="px-6 py-3">{items.price}</td>
-            <td className="px-6 py-3">{items.quantity}</td>
+            <td className="px-6 py-3 text-center">{items.quantity}</td>
             <td className="px-6 py-3">{items.totalPrice}</td>
             <td className="px-6 py-3">{items.status}</td>
             <td className="flex flex-row px-6  py-7">
