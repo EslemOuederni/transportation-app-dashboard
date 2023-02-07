@@ -166,12 +166,58 @@ module.exports.update = asyncHandler(async (req, res) => {
 });
 
 // delete an admin
-module.exports.delete = asyncHandler(async (req, res) => {
-  const deletedAdmin = await admin.findByIdAndDelete(req.admin.email);
+module.exports.deleteAdmin = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const deletedAdmin = await admin.findByIdAndDelete(id);
   if (deletedAdmin) {
     res.json({
       message: "Admin deleted",
     });
+  } else {
+    res.status(404);
+    throw new Error("Admin not found");
+  }
+});
+
+// reset password
+
+module.exports.resetPassword = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const { password, confirmPassword } = req.body;
+  //strong password
+  if (!validator.isStrongPassword(password)) {
+    return res.status(400).json({
+      message:
+        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character",
+    });
+  }
+  // check if the password is correct
+  if (password !== confirmPassword) {
+    return res.status(400).json({
+      message: "Passwords do not match",
+    });
+  }
+  // hash the password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const adminToUpdate = await admin.findById(id);
+  if (adminToUpdate) {
+    try {
+      const updatedAdmin = await admin.findByIdAndUpdate(
+        id,
+        {
+          password: hashedPassword,
+        },
+        { new: true }
+      );
+      res.json(updatedAdmin);
+    } catch (error) {
+      res.status(400).json({
+        message: "Error updating admin",
+      });
+    }
   } else {
     res.status(404);
     throw new Error("Admin not found");
