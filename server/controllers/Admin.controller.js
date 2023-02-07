@@ -135,3 +135,45 @@ module.exports.getOne = asyncHandler(async (req, res) => {
     throw new Error("Admin not found");
   }
 });
+
+// update an admin
+
+module.exports.update = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { firstName, lastName } = req.body;
+
+  const adminToUpdate = await admin.findById(id);
+  if (adminToUpdate) {
+    try {
+      const updatedAdmin = await admin.findByIdAndUpdate(
+        id,
+        {
+          firstName,
+          lastName,
+        },
+        { new: true }
+      );
+      res.json(updatedAdmin);
+    } catch (error) {
+      res.status(400).json({
+        message: "Error updating admin",
+      });
+    }
+  } else {
+    res.status(404);
+    throw new Error("Admin not found");
+  }
+});
+
+// delete an admin
+module.exports.delete = asyncHandler(async (req, res) => {
+  const deletedAdmin = await admin.findByIdAndDelete(req.admin.email);
+  if (deletedAdmin) {
+    res.json({
+      message: "Admin deleted",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Admin not found");
+  }
+});
