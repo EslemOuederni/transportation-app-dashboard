@@ -10,7 +10,9 @@ const {
   getAll,
   update,
   deleteAdmin,
+  resetPasswordMail,
   resetPassword,
+  verifyPasswordResetLink,
 } = require("../controllers/Admin.controller");
 
 const { auth } = require("../middleware/authentication.middleware");
@@ -22,6 +24,8 @@ adminRouter.get("/getOneAdmin", auth, getOne);
 adminRouter.get("/getAllAdmins", auth, getAll);
 adminRouter.put("/updateAdmin/:id", auth, update);
 adminRouter.delete("/deleteAdmin/:id", auth, deleteAdmin);
-adminRouter.post("/resetPassword/:id", resetPassword);
+adminRouter.get("/resetPwd/:id", verifyPasswordResetLink);
+adminRouter.post("/resetPwd/:id", resetPassword);
+adminRouter.post("/resetPassword/sendMail", resetPasswordMail);
 
 module.exports = adminRouter;

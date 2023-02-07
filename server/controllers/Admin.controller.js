@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const sendEmail = require("../utils/sendEmail");
 // generate a token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -179,11 +180,65 @@ module.exports.deleteAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+//send password reset mail
+
+module.exports.resetPasswordMail = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  try {
+    let adminToUpdate = await admin.findOne({ email });
+    if (!adminToUpdate) {
+      return res.status(400).json({
+        message: "Email not found",
+      });
+    }
+    console.log(adminToUpdate._id);
+
+    let url = `http://127.0.0.1:5173/auth/resetPwd/${adminToUpdate._id}`;
+    console.log(adminToUpdate.email);
+
+    await sendEmail(
+      email,
+      "Reset Password",
+      `Click the link below to reset your password ${url}`
+    );
+
+    res.status(200).json({
+      message: "Email sent",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error sending email",
+    });
+  }
+});
+
+// verify password reset link
+
+module.exports.verifyPasswordResetLink = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    let adminToUpdate = await admin.findOne({ _id: id });
+    if (!adminToUpdate) {
+      return res.status(400).json({
+        message: "Invalid or expired link",
+      });
+    }
+
+    res.status(200).json({
+      message: "Valid url",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error verifying link",
+    });
+  }
+});
+
 // reset password
 
 module.exports.resetPassword = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
   const { password, confirmPassword } = req.body;
   //strong password
   if (!validator.isStrongPassword(password)) {
@@ -203,6 +258,7 @@ module.exports.resetPassword = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const adminToUpdate = await admin.findById(id);
+
   if (adminToUpdate) {
     try {
       const updatedAdmin = await admin.findByIdAndUpdate(
