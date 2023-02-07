@@ -12,12 +12,14 @@ import TransportPage from "./Pages/TransportPage";
 import AddVehicule from "./Pages/AddVehicule";
 import TripsPage from "./Pages/TripsPage";
 import AddTrip from "./Pages/AddTrip";
+import ResetPwdPage from "./Pages/ResetPwdPage";
 
 const LoginContainer = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/resetPwd/:id" element={<ResetPwdPage />} />
     </Routes>
   );
 };

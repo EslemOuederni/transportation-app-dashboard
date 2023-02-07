@@ -54,7 +54,7 @@ const LoginPage = () => {
                   <input className="mr-2" type="checkbox" />
                   Remember me
                 </p>
-                <p>Need Help?</p>
+                <Link to="/auth/resetPwd">Forgot Password ?</Link>
               </div>
               <p className="py-8">
                 <span className="text-gray-600">New Here ?</span>{" "}
