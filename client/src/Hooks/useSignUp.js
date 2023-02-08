@@ -7,11 +7,6 @@ const useSignUp = () => {
   const [loading, setLoading] = useState(null);
   const { dispatch } = useContext(AuthContext);
 
-  const regexEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-
-  const regexPassword =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
-
   const signup = async (email, password, firstName, lastName) => {
     setLoading(true);
     setError(null);
@@ -36,8 +31,8 @@ const useSignUp = () => {
       } else if (error.response.data.message === "Email already registered") {
         setError("Email already exists");
         setLoading(false);
-      } else if (error.response.data.message === "Invalid email or password") {
-        setError("Invalid email or password");
+      } else if (error.response.data.message === "Please enter a valid email") {
+        setError("Please enter a valid email");
         setLoading(false);
       } else if (error.response.data.message === "Email not found") {
         setError("Email not found");
@@ -50,8 +45,11 @@ const useSignUp = () => {
           "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character"
         );
         setLoading(false);
+      } else if (error.response.data.message === "Email already registered") {
+        setError("Email already registered");
+        setLoading(false);
       } else {
-        setError("Something went wrong");
+        setError("Invalid admin data");
         setLoading(false);
       }
       console.log(error.response.data);
