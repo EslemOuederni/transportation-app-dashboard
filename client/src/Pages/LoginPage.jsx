@@ -12,7 +12,9 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signin(email, password);
-    navigate("/dashboard/home");
+    setTimeout(() => {
+      navigate("/dashboard/home");
+    }, 2000);
   };
 
   return (

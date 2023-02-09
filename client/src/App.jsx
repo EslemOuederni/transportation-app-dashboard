@@ -13,6 +13,7 @@ import AddVehicule from "./Pages/AddVehicule";
 import TripsPage from "./Pages/TripsPage";
 import AddTrip from "./Pages/AddTrip";
 import ResetPwdPage from "./Pages/ResetPwdPage";
+import EditProfilePage from "./Pages/EditProfilePage";
 
 const LoginContainer = () => {
   return (
@@ -38,7 +39,7 @@ const DefaultContainer = () => {
           }
         />
         <Route path="/profile" element={<ProfilePage />} />
-        {/* <Route path="/users" element={<UsersPage />} /> */}
+        <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="/transport" element={<TransportPage />} />
         <Route path="/transport/addVehicule" element={<AddVehicule />} />

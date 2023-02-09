@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import useSignUp from "../Hooks/useSignup";
 
@@ -12,6 +11,7 @@ const RegisterPage = () => {
   const { error, loading, signup } = useSignUp();
 
   let navigate = useNavigate();
+  console.log(error);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

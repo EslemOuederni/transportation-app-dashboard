@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Modal from "./Modal";
 const TripsTableComponent = ({ data, setData }) => {
+  const [showModal, setShowModal] = useState(false);
+
   const handleDelete = (id) => {
     console.log(id);
     axios
@@ -8,6 +11,7 @@ const TripsTableComponent = ({ data, setData }) => {
       .then((res) => {
         console.log(res);
         setData(data.filter((item) => item._id !== id));
+        setShowModal(false);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +35,16 @@ const TripsTableComponent = ({ data, setData }) => {
             <td className="text-center">{item.arrivalCity.name}</td>
             <td className="text-center">{item.numberOfTickets}</td>
             <td className="flex flex-row items-center justify-center py-3 px-6">
-              <button onClick={(e) => handleDelete(item._id)}>
+              {showModal ? (
+                <Modal
+                  open={showModal}
+                  setOpen={setShowModal}
+                  handleDelete={(e) => handleDelete(item._id)}
+                />
+              ) : (
+                ""
+              )}
+              <button onClick={() => setShowModal(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
