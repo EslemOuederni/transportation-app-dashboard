@@ -78,7 +78,7 @@ module.exports.updateTransport = async (req, res) => {
 
 // DELETE a transport
 module.exports.deleteTransport = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const Transport = await transport.findOneAndDelete(
     { _id: id },
     {

@@ -1,6 +1,18 @@
 import React from "react";
+import axios from "axios";
 
-const TableComponent = ({ data }) => {
+const TableComponent = ({ data, setData }) => {
+  const handleDelete = (id) => {
+    axios
+      .delete("http://localhost:3000/api/transport/" + id)
+      .then((response) => {
+        console.log(response.data);
+        setData(data.filter((el) => el._id !== id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <table className="text-left text-gray-100  mt-4 text-lg">
       <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
@@ -13,12 +25,12 @@ const TableComponent = ({ data }) => {
       </thead>
       <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
         {data.map((item, index) => (
-          <tr className="bg-white border-b" key={index}>
+          <tr className="bg-white border-b" key={item._id.toString()}>
             <td className="px-6 py-3">{item.registrationNumber}</td>
             <td className="px-6 py-3">{item.capacity}</td>
             <td className="px-6 py-3">{item.description}</td>
             <td className="flex flex-row items-center py-3 px-6">
-              <button>
+              <button onClick={() => handleDelete(item._id)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
