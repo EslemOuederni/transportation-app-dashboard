@@ -42,6 +42,7 @@ const DefaultContainer = () => {
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="/transport" element={<TransportPage />} />
         <Route path="/transport/addVehicule" element={<AddVehicule />} />
+
         <Route path="/trips" element={<TripsPage />} />
         <Route path="/trips/addTrip" element={<AddTrip />} />
       </Routes>
