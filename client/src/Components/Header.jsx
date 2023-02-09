@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-[900px] lg:w-[1055px] 2xl:w-[1400px] h-[100px] mx-[300px] border-b-[1px] border-gray-300">
+    <div className="w-[900px] lg:w-[1055px] 2xl:w-[1400px] h-[100px] border-b-[1px] border-gray-300">
       <div className=" flex flex-row items-center justify-between pt-[34px]">
         <div className="flex flex-row items-center ">
           <p className="font-bold text-2xl ml-8 ">{time}</p>

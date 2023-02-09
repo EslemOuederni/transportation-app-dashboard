@@ -11,10 +11,15 @@ import { RiDashboardLine, RiBusLine, RiAdminLine } from "react-icons/ri";
 const NavBar = () => {
   return (
     <>
-      <div className=" w-[300px] h-screen bg-slate-900 z-[100] absolute">
+      <div className=" w-[290px] max-h-full h-full bg-slate-900 absolute top-0 left-0">
         <div className="flex flex-col items-center justify-center">
-          <div className=" p-10">
+          <div className=" p-9">
             <img src={logo} alt="" />
+          </div>
+          <div className=" flex items-center justify-center w-full flex-auto">
+            <div className=" w-full h-[1px] visible border-b border-gray-400 mb-3">
+              {" "}
+            </div>
           </div>
           <div className="navigation flex flex-col justify-between gap-8 px-4">
             <NavItem

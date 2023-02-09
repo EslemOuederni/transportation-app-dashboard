@@ -6,7 +6,7 @@ const ProfilePage = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const name = user.firstName + " " + user.lastName;
   return (
-    <div className=" ml-[300px] p-6">
+    <div className="p-6">
       <div className="flex flex-col">
         <div className=" mt-3 font-bold">Personal info</div>
         <label className=" mt-3">Email</label>

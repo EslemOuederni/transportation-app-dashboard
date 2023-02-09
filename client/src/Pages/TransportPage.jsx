@@ -35,7 +35,7 @@ const TransportPage = () => {
   };
 
   return (
-    <div className="mx-[450px] mt-4 pt-5 pl-9 flex flex-col">
+    <div className="mt-4 pt-5 ml-[100px] mb-4 flex flex-col h-full w-72">
       <AddButton handleClick={handleClick} name="Vehicule" />
       <div>
         <label> Mean of Transportation : </label>

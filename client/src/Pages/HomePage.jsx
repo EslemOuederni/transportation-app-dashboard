@@ -34,7 +34,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="ml-[350px]">
+    <div className="h-full">
       <div className="flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4">
         <ChartCard
           name="Users"
