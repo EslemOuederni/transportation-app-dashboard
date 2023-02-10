@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ChartCard from "../Components/ChartCard";
+import ChartCard from "../Components/Card";
 import axios from "axios";
+import ChartComponent from "../Components/ChartComponent";
 
 const HomePage = () => {
   const [numberOfUsers, setNumberOfUsers] = useState(0);
@@ -9,13 +10,11 @@ const HomePage = () => {
 
   const count = async () => {
     const res = await axios.get("http://localhost:3000/api/client/count");
-    console.log(res.data);
     setNumberOfUsers(res.data);
     return numberOfUsers, numberOfTrips;
   };
   const countTrips = async () => {
     const trips = await axios.get("http://localhost:3000/api/trip/get/count");
-    console.log(trips.data);
     setNumberOfTrips(trips.data);
     return numberOfTrips;
   };
@@ -23,7 +22,6 @@ const HomePage = () => {
     const money = await axios.get(
       "http://localhost:3000/api/ticket/count/money"
     );
-    console.log(money.data.total);
     setMoneyEarned(money.data);
     return moneyEarned;
   };
@@ -100,6 +98,7 @@ const HomePage = () => {
           bg={"bg-red-100"}
         />
       </div>
+      <ChartComponent />
     </div>
   );
 };
