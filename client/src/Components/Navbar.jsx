@@ -16,11 +16,7 @@ const NavBar = () => {
           <div className=" p-9">
             <img src={logo} alt="" />
           </div>
-          <div className=" flex items-center justify-center w-full flex-auto">
-            <div className=" w-full h-[1px] visible border-b border-gray-400 mb-3">
-              {" "}
-            </div>
-          </div>
+
           <div className="navigation flex flex-col justify-between gap-8 px-4">
             <NavItem
               name="Dashboard"
