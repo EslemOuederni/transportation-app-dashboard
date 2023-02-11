@@ -8,8 +8,11 @@ const NavItem = ({ name, icon, navigation }) => {
     navigate(navigation);
   };
   return (
-    <button className=" w-[267px] text-white p" onClick={handleClick}>
-      <h4 className="flex flex-row items-center font-semibold lg:text-[18px]">
+    <button
+      className=" w-[267px] text-white hover:bg-emerald-700 py-2 mx-1 rounded "
+      onClick={handleClick}
+    >
+      <h4 className="flex flex-row items-center font-semibold lg:text-[18px] ml-2">
         {icon} {name}
       </h4>
     </button>

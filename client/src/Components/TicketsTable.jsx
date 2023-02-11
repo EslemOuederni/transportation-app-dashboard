@@ -16,7 +16,7 @@ function TicketsTable({ data, setData }) {
   };
 
   return (
-    <table className=" table-auto w-[700px]  text-left m-8  mx-40 p-10 text-lg">
+    <table className=" table-auto text-left m-8 p-10 text-lg">
       <thead className=" text-lg uppercase text-gray-300 bg-blue-600 bg-slate-500 mx-10 px-10">
         <tr>
           <th className=" px-6 py-3">user</th>

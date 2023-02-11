@@ -1,0 +1,7 @@
+html,
+body {
+  height: 100vh;
+  margin-left: 300px;
+  padding: 0;
+  overflow-x: hidden;
+}
