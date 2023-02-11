@@ -30,9 +30,9 @@ const TripsPage = () => {
   };
 
   return (
-    <div className="ml-[300px]">
-      <h1 className="text-2xl font-bold px-3">List of Trips</h1>
-      <div className="flex flex-col justify-center items-center">
+    <div className="ml-[100px]">
+      <h1 className="text-2xl font-bold px-3 mb-3 mt-3">List of Trips</h1>
+      <div className="flex flex-col justify-start items-start">
         <AddButton handleClick={handleClick} name="Trip" />
         <TripsTableComponent data={data} setData={setData} />
       </div>

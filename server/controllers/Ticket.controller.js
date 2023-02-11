@@ -103,3 +103,20 @@ module.exports.countMoney = async (req, res) => {
   ]);
   res.status(200).json(count[0].total);
 };
+
+// count ticket by month
+
+module.exports.countTicketByMonth = async (req, res) => {
+  const count = await Ticket.aggregate([
+    {
+      $group: {
+        _id: {
+          $month: "$createdAt",
+        },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { _id: 1 } },
+  ]);
+  res.status(200).json(count);
+};

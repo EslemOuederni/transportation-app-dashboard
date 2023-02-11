@@ -36,7 +36,7 @@ const TableComponent = ({ data, setData }) => {
   };
 
   return (
-    <table className=" w-[700px] text-left text-gray-100  mt-4 p-10 text-lg">
+    <table className="text-left text-gray-100  mt-4 text-lg">
       <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
         <tr>
           <th className="px-6 py-3">Registeration Number</th>

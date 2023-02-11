@@ -3,7 +3,7 @@ import "./App.css";
 import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/Navbar";
 import Protected from "./Components/Protected";
 import Header from "./Components/Header";
 import ProfilePage from "./Pages/ProfilePage";
