@@ -58,6 +58,7 @@ const TableComponent = ({ data, setData }) => {
                   setOpen={setShowDelet}
                   content="Are you sure you want to delete this Transport from your list ?"
                   handle={(e) => handleDelete(item._id)}
+                  button={Delet}
                 />
               ) : (
                 ""
