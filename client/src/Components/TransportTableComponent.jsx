@@ -87,11 +87,11 @@ const TableComponent = ({ data, setData }) => {
                   setOpen={setShowUpdate}
                   content={
                     <UpdateForm
-                      setCapacity={setCapacity}
-                      setDescription={setDescription}
-                      capacity={capacity}
-                      description={description}
-                      updateTransport={updateTransport}
+                    // setCapacity={setCapacity}
+                    // setDescription={setDescription}
+                    // capacity={capacity}
+                    // description={description}
+                    // updateTransport={updateTransport}
                     />
                   }
                   handle={(e) => updateTransport(item._id)}

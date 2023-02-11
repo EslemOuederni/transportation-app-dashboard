@@ -39,7 +39,11 @@ const TripsTableComponent = ({ data, setData }) => {
                 <Modal
                   open={showModal}
                   setOpen={setShowModal}
+                  content={
+                    "Are you sure you want to delete this Trip from your list ?"
+                  }
                   handleDelete={(e) => handleDelete(item._id)}
+                  button={"Delete"}
                 />
               ) : (
                 ""

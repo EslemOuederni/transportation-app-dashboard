@@ -45,7 +45,7 @@ const Modal = ({ handle, open, setOpen, content, button }) => {
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900"
                       >
-                        Delete a trip
+                        {button} a trip
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">{content}</p>
