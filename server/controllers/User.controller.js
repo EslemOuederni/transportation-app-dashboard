@@ -142,3 +142,9 @@ exports.countUsers = async (req, res) => {
   const count = await User.countDocuments();
   res.status(200).json(count);
 };
+
+// get all users
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find({});
+  res.status(200).json(users);
+};
