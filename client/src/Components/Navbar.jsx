@@ -35,6 +35,7 @@ const NavBar = () => {
             <NavItem
               name="Admins"
               icon={<RiAdminLine color="#fff" className="mr-2" size={24} />}
+              navigation={"/dashboard/users/admins"}
             />
             <NavItem
               name="Tickets"
