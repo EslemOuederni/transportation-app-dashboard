@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ChartCard from "../Components/Card";
 import axios from "axios";
-import ChartComponent from "../Components/ChartComponent";
+import ChartComponent from "../Components/BarChartComponent";
+import PieChartComponent from "../Components/PieChartComponent";
 
 const HomePage = () => {
   const [numberOfUsers, setNumberOfUsers] = useState(0);
@@ -98,7 +99,10 @@ const HomePage = () => {
           bg={"bg-red-100"}
         />
       </div>
-      <ChartComponent />
+      <div className=" flex mt-4">
+        <ChartComponent />
+        <PieChartComponent />
+      </div>
     </div>
   );
 };
