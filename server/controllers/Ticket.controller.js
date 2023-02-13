@@ -120,3 +120,31 @@ module.exports.countTicketByMonth = async (req, res) => {
   ]);
   res.status(200).json(count);
 };
+
+// number of tickets by trip
+
+module.exports.countTicketByTrip = async (req, res) => {
+  const cities = [
+    { path: "trip", populate: { path: "departureCity" } },
+    { path: "trip", populate: { path: "arrivalCity" } },
+  ];
+  const count = await Ticket.aggregate([
+    {
+      $lookup: {
+        from: "trips",
+        localField: "trip",
+        foreignField: "_id",
+        as: "trip",
+      },
+    },
+    {
+      $group: {
+        _id: "$trip",
+        count: { $sum: "$quantity" },
+      },
+    },
+    { $sort: { count: -1 } },
+  ]);
+  const pop = await Trip.populate(count, { path: "_id" });
+  res.json(pop);
+};
