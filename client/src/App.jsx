@@ -15,6 +15,7 @@ import AddTrip from "./Pages/AddTrip";
 import ResetPwdPage from "./Pages/ResetPwdPage";
 import EditProfilePage from "./Pages/EditProfilePage";
 import AdminPage from "./Pages/AdminPage";
+import ClientPage from "./Pages/ClientPage";
 
 const LoginContainer = () => {
   return (
@@ -42,6 +43,7 @@ const DefaultContainer = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/users/admins" element={<AdminPage />} />
+        <Route path="/users/clients" element={<ClientPage />} />
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="/transport" element={<TransportPage />} />
         <Route path="/transport/addVehicule" element={<AddVehicule />} />

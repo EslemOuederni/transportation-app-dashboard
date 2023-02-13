@@ -29,8 +29,9 @@ const NavBar = () => {
               navigation="/dashboard/profile"
             />
             <NavItem
-              name="Users"
+              name="Clients"
               icon={<HiOutlineUsers className="mr-2" size={24} />}
+              navigation={"/dashboard/users/clients"}
             />
             <NavItem
               name="Admins"
