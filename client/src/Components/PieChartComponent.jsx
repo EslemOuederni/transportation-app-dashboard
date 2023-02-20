@@ -35,21 +35,20 @@ const PieChartComponent = () => {
   useEffect(() => {
     console.log(tickets);
     tickets.map((item) => {
-      if (
-        labels.indexOf(item._id.departureCity + "-" + item._id.arrivalCity) ===
-        -1
-      ) {
-        labels.push(item._id.departureCity + "-" + item._id.arrivalCity);
+      console.log(item.arrivalCity.name);
+      if (labels.indexOf(item.arrivalCity.name === -1)) {
+        labels.push(item.arrivalCity);
         count.push(item.count);
       }
     });
-    console.log(tickets[0]);
+
+    console.log(tickets);
   }, [tickets]);
   const data = {
     labels: labels,
     datasets: [
       {
-        label: "My First Dataset",
+        label: labels.map((item) => item.name),
         data: count,
         backgroundColor: [
           "rgb(255, 99, 132)",
