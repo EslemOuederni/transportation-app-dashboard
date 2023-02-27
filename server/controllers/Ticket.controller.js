@@ -146,10 +146,13 @@ module.exports.countTicketByTrip = async (req, res) => {
   }).lean();
 
   const result = count.map((item, index) => {
-    console.log(arrivalCity[index]);
+    const arrCity = arrivalCity.find(
+      (city) => city._id.toString() === item._id[0].arrivalCity.toString()
+    );
+    console.log("city: ", arrCity);
     return {
       ...item,
-      arrivalCity: arrivalCity[index].name,
+      arrivalCity: arrCity.name,
     };
   });
   res.json(result);
