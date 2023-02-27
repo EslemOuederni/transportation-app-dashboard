@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const NavItem = ({ name, icon, navigation }) => {
+const NavItem = ({ name, icon, navigation, style }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -9,7 +9,7 @@ const NavItem = ({ name, icon, navigation }) => {
   };
   return (
     <button
-      className=" w-[267px] text-white hover:bg-emerald-700 py-2 mx-1 rounded "
+      className={` w-[150px] md:w-[267px] text-white hover:bg-emerald-700 py-2 mx-1 rounded ${style} `}
       onClick={handleClick}
     >
       <h4 className="flex flex-row items-center font-semibold lg:text-[18px] ml-2">

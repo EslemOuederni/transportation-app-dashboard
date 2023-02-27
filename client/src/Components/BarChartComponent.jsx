@@ -55,7 +55,7 @@ const ChartComponent = () => {
     ],
   };
   return (
-    <div className=" max-w-sm max-h-sm">
+    <div className=" max-w-sm max-h-sm mb-4">
       <Bar
         data={data}
         options={{

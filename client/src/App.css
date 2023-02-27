@@ -1,7 +1,15 @@
-html,
-body {
+html {
   height: 100vh;
-  margin-left: 300px;
+  margin-left: 290px;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
+}
+body {
+  scroll-behavior: smooth;
+}
+@media screen and (max-width: 768px) {
+  html {
+    margin-left: 190px;
+  }
 }

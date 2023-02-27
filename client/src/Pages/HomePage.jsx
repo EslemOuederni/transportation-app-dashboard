@@ -34,7 +34,7 @@ const HomePage = () => {
 
   return (
     <div className="h-full">
-      <div className="flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4">
+      <div className=" flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4 flex-wrap">
         <ChartCard
           name="Users"
           data={numberOfUsers}
@@ -99,9 +99,36 @@ const HomePage = () => {
           bg={"bg-red-100"}
         />
       </div>
-      <div className=" flex mt-4">
-        <ChartComponent />
-        <PieChartComponent />
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
+      </div>
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
+      </div>
+      \{" "}
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
       </div>
     </div>
   );
