@@ -36,7 +36,7 @@ const PieChartComponent = () => {
     console.log(tickets);
     tickets.map((item) => {
       console.log(item.arrivalCity.name);
-      if (labels.indexOf(item.arrivalCity.name === -1)) {
+      if (labels.includes(item.arrivalCity) === false) {
         labels.push(item.arrivalCity);
         count.push(item.count);
       }
