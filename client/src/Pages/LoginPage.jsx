@@ -19,8 +19,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className=" w-full h-screen">
-        <div className="max-w-[450px] h-[520px] mx-auto  bg-slate-900 text-white mt-32 rounded-lg ">
+      <div className=" w-full h-screen ">
+        <div className="max-w-[450px] h-[520px] bg-slate-900 text-white mt-9 rounded-lg ">
           <div className="max-w-[320px] mx-auto py-16">
             <h1 className="text-3xl font-bold">Sign In</h1>
             <form

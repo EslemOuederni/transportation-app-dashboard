@@ -10,8 +10,8 @@ const {
   deleteCity,
 } = require("../controllers/City.controllers");
 
-router.get("/", getAllCities);
 router.get("/:id", getOneCity);
+router.get("/", getAllCities);
 router.post("/", createCity);
 router.patch("/:id", updateCity);
 router.delete("/:id", deleteCity);

@@ -30,25 +30,12 @@ const TripsTableComponent = ({ data, setData }) => {
       </thead>
       <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
         {data.map((item, index) => (
-          <tr className="bg-white border-b" key={index}>
+          <tr className="bg-white border-b" key={item._id}>
             <td className="text-center">{item.departureCity.name} </td>
             <td className="text-center">{item.arrivalCity.name}</td>
             <td className="text-center">{item.numberOfTickets}</td>
             <td className="flex flex-row items-center justify-center py-3 px-6">
-              {showModal ? (
-                <Modal
-                  open={showModal}
-                  setOpen={setShowModal}
-                  content={
-                    "Are you sure you want to delete this Trip from your list ?"
-                  }
-                  handleDelete={(e) => handleDelete(item._id)}
-                  button={"Delete"}
-                />
-              ) : (
-                ""
-              )}
-              <button onClick={() => setShowModal(true)}>
+              <button onClick={() => handleDelete(item._id)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

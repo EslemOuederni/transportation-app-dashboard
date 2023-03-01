@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ChartCard from "../Components/Card";
 import axios from "axios";
-import ChartComponent from "../Components/ChartComponent";
+import ChartComponent from "../Components/BarChartComponent";
+import PieChartComponent from "../Components/PieChartComponent";
 
 const HomePage = () => {
   const [numberOfUsers, setNumberOfUsers] = useState(0);
@@ -33,7 +34,7 @@ const HomePage = () => {
 
   return (
     <div className="h-full">
-      <div className="flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4">
+      <div className=" flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4 flex-wrap">
         <ChartCard
           name="Users"
           data={numberOfUsers}
@@ -98,7 +99,37 @@ const HomePage = () => {
           bg={"bg-red-100"}
         />
       </div>
-      <ChartComponent />
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
+      </div>
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
+      </div>
+      \{" "}
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
+      </div>
     </div>
   );
 };

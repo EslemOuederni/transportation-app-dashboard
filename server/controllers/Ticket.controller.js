@@ -1,6 +1,7 @@
 const Ticket = require("../models/Ticket.Model");
 const Trip = require("../models/Trip.Model");
 const mongoose = require("mongoose");
+const City = require("../models/City.Model");
 
 // GET all tickets
 module.exports.getTickets = async (req, res) => {
@@ -119,4 +120,40 @@ module.exports.countTicketByMonth = async (req, res) => {
     { $sort: { _id: 1 } },
   ]);
   res.status(200).json(count);
+};
+
+// number of tickets by trip destination
+
+module.exports.countTicketByTrip = async (req, res) => {
+  const count = await Ticket.aggregate([
+    {
+      $lookup: {
+        from: "trips",
+        localField: "trip",
+        foreignField: "_id",
+        as: "trip",
+      },
+    },
+    {
+      $group: {
+        _id: "$trip",
+        count: { $sum: "$quantity" },
+      },
+    },
+  ]);
+  const arrivalCity = await City.find({
+    _id: { $in: count.map((item) => item._id[0].arrivalCity) },
+  }).lean();
+
+  const result = count.map((item, index) => {
+    const arrCity = arrivalCity.find(
+      (city) => city._id.toString() === item._id[0].arrivalCity.toString()
+    );
+    console.log("city: ", arrCity);
+    return {
+      ...item,
+      arrivalCity: arrCity.name,
+    };
+  });
+  res.json(result);
 };

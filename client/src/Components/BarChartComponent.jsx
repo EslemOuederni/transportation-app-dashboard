@@ -28,7 +28,6 @@ const ChartComponent = () => {
 
   const getTicketData = async () => {
     const res = await axios.get("http://localhost:3000/api/ticket/count/month");
-    console.log(res.data);
     setChartData(res.data);
     return res.data;
   };
@@ -36,15 +35,12 @@ const ChartComponent = () => {
     getTicketData();
   }, []);
   useEffect(() => {
-    console.log(chartData);
     chartData.forEach((item) => {
       if (month.indexOf(matchMonth(item._id)) === -1) {
         month.push(matchMonth(item._id));
         count.push(item.count);
       }
     });
-    console.log("month", month);
-    console.log("count", count);
   }, [chartData]);
 
   const data = {
@@ -59,7 +55,7 @@ const ChartComponent = () => {
     ],
   };
   return (
-    <div className=" max-w-sm max-h-sm">
+    <div className=" max-w-sm max-h-sm mb-4">
       <Bar
         data={data}
         options={{
