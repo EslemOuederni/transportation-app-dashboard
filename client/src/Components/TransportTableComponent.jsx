@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Modal from "./Modal";
+import UpdateForm from "./UpdateForm";
 
 const TableComponent = ({ data, setData }) => {
+  const [showDelet, setShowDelet] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  const [capacity, setCapacity] = useState("");
+  const [description, setDescription] = useState("");
+
   const handleDelete = (id) => {
     axios
       .delete("http://localhost:3000/api/transport/" + id)
@@ -13,6 +21,20 @@ const TableComponent = ({ data, setData }) => {
         console.log(error);
       });
   };
+
+  // update functions
+
+  const updateTransport = (id) => {
+    axios
+      .put("http://localhost:3000/api/transport/" + id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
+
   return (
     <table className="text-left text-gray-100  mt-4 text-lg">
       <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
@@ -30,7 +52,18 @@ const TableComponent = ({ data, setData }) => {
             <td className="px-6 py-3">{item.capacity}</td>
             <td className="px-6 py-3">{item.description}</td>
             <td className="flex flex-row items-center py-3 px-6">
-              <button onClick={() => handleDelete(item._id)}>
+              {showDelet ? (
+                <Modal
+                  open={showDelet}
+                  setOpen={setShowDelet}
+                  content="Are you sure you want to delete this Transport from your list ?"
+                  handle={(e) => handleDelete(item._id)}
+                  button={"Delete"}
+                />
+              ) : (
+                ""
+              )}
+              <button onClick={() => setShowDelet(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -46,8 +79,28 @@ const TableComponent = ({ data, setData }) => {
                   />
                 </svg>
               </button>
+
               <p className=" ml-1 mr-1">/</p>
-              <button>
+              {showUpdate ? (
+                <Modal
+                  open={showUpdate}
+                  setOpen={setShowUpdate}
+                  content={
+                    <UpdateForm
+                    // setCapacity={setCapacity}
+                    // setDescription={setDescription}
+                    // capacity={capacity}
+                    // description={description}
+                    // updateTransport={updateTransport}
+                    />
+                  }
+                  handle={(e) => updateTransport(item._id)}
+                  button={"Edit"}
+                />
+              ) : (
+                ""
+              )}
+              <button onClick={() => setShowUpdate(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

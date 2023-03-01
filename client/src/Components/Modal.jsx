@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-const Modal = ({ handleDelete, open, setOpen }) => {
+const Modal = ({ handle, open, setOpen, content, button }) => {
   console.log(open);
 
   return (
@@ -45,13 +45,10 @@ const Modal = ({ handleDelete, open, setOpen }) => {
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900"
                       >
-                        Delete a trip
+                        {button} a trip
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Are you sure you want to delete this trip from your
-                          list ?
-                        </p>
+                        <p className="text-sm text-gray-500">{content}</p>
                       </div>
                     </div>
                   </div>
@@ -67,9 +64,9 @@ const Modal = ({ handleDelete, open, setOpen }) => {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleDelete}
+                    onClick={handle}
                   >
-                    Delete
+                    {button}
                   </button>
                 </div>
               </Dialog.Panel>
@@ -80,4 +77,5 @@ const Modal = ({ handleDelete, open, setOpen }) => {
     </Transition.Root>
   );
 };
+
 export default Modal;
