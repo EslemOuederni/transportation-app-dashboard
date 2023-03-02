@@ -109,27 +109,6 @@ const HomePage = () => {
           <PieChartComponent />
         </div>
       </div>
-      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
-        <div>
-          {" "}
-          <ChartComponent />
-        </div>
-        <div>
-          {" "}
-          <PieChartComponent />
-        </div>
-      </div>
-      \{" "}
-      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
-        <div>
-          {" "}
-          <ChartComponent />
-        </div>
-        <div>
-          {" "}
-          <PieChartComponent />
-        </div>
-      </div>
     </div>
   );
 };

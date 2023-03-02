@@ -16,6 +16,7 @@ import ResetPwdPage from "./Pages/ResetPwdPage";
 import EditProfilePage from "./Pages/EditProfilePage";
 import AdminPage from "./Pages/AdminPage";
 import ClientPage from "./Pages/ClientPage";
+import Footer from "./Components/Footer";
 
 const LoginContainer = () => {
   return (
@@ -51,6 +52,7 @@ const DefaultContainer = () => {
           <Route path="/trips" element={<TripsPage />} />
           <Route path="/trips/addTrip" element={<AddTrip />} />
         </Routes>
+        <Footer />
       </div>
     </>
   );

@@ -8,6 +8,9 @@ html {
 body {
   scroll-behavior: smooth;
 }
+.footer {
+  width: calc(100% - 290px);
+}
 @media screen and (max-width: 768px) {
   html {
     margin-left: 190px;
