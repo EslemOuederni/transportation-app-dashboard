@@ -13,8 +13,10 @@ const ChartCard = ({ name, data, svg, bg }) => {
             </span>
           </div>
           <div className="flex-1 pl-1">
-            <div className="text-xl font-medium text-gray-600">{data}</div>
-            <div className="text-sm text-gray-900 sm:text-base">{name}</div>
+            <div className="text-xl font-semibold text-gray-600">{data}</div>
+            <div className="text-sm text-gray-900 font-semibold sm:text-base">
+              {name}
+            </div>
           </div>
         </div>
       </div>
