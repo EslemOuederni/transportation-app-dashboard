@@ -81,6 +81,8 @@ EMAIL=<email_for_nodemailer>
 PASSWORD=<password_for_nodemailer>
 ```
 
+Go to `localhost/auth/register` to add new admin in order to be able to use the app
+
 ---
 
 If I'm missing something, please let me know
