@@ -5,7 +5,7 @@ const TransportSchema = new Schema({
   registrationNumber: {
     type: String,
     required: true,
-    index: true,
+    unique: true,
   },
   transportMean: {
     type: String,

@@ -23,7 +23,6 @@ module.exports.getTransports = async (req, res) => {
   try {
     const transports = await transport.find({}).sort({ createdAt: -1 });
     res.json(transports);
-    console.log(transports);
   } catch (error) {
     res.json({ message: error });
   }
@@ -45,16 +44,18 @@ module.exports.getTransportsByTransportMean = async (req, res) => {
 // POST a transport
 module.exports.addTransport = async (req, res) => {
   const { transportMean, registrationNumber, description, capacity } = req.body;
+  const newVehicle = new transport({
+    transportMean: transportMean,
+    registrationNumber: registrationNumber,
+    capacity: capacity,
+    description: description,
+  });
+
   try {
-    const newTransport = await transport.create({
-      transportMean,
-      registrationNumber,
-      description,
-      capacity,
-    });
-    res.status(201).json(newTransport);
+    const savedTransport = await newVehicle.save();
+    res.status(201).json(savedTransport);
   } catch (error) {
-    res.status(400).json({ message: error });
+    res.status(400).json({ message: error.message });
   }
 };
 
