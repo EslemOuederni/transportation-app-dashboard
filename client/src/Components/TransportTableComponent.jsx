@@ -15,8 +15,6 @@ const TableComponent = ({ data, setData }) => {
       .then((response) => {
         console.log(response.data);
         setData(data.filter((el) => el._id !== id));
-        setShowDelet(false);
-        settobeDeleted(false);
       })
       .catch((error) => {
         console.log(error);
