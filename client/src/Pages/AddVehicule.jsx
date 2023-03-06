@@ -21,21 +21,22 @@ const AddVehicule = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/transport/",
-        { vehicule }
+        vehicule
       );
       console.log(response);
       if (response.status === 200 || response.status === 201) {
         console.log("vehicule added");
+        alert("vehicule added");
       }
     } catch (error) {
+      console.log("shit");
       console.log(error.response.data.message);
     }
   };
   return (
-    <div>
+    <div className="overflow-auto h-[450px]">
       <AddForm
         transportationMean={transportationMean}
-        handleSubmit={handleSubmit}
         capacity={capacity}
         description={description}
         registrationNumber={registrationNumber}
@@ -43,6 +44,7 @@ const AddVehicule = () => {
         setDescription={setDescription}
         setRegistrationNumber={setRegistrationNumber}
         setTransport={setTransport}
+        handleSubmit={handleSubmit}
       />
     </div>
   );
