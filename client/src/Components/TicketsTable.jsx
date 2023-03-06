@@ -1,14 +1,22 @@
+import { useState } from "react";
 import axios from "axios";
 import React from "react";
 import { useReducer } from "react";
+import Modal from "./Modal";
 
 function TicketsTable({ data, setData }) {
+  const [openModal , setOpenModal] = useState(false);
+  const [tobeDeleted , settobeDeleted] = useState(false);
+
   const handleDelete = (id) => {
+    
     axios
       .delete("http://localhost:3000/api/ticket/" + id)
       .then((response) => {
         console.log(response.data);
         setData(data.filter((el) => el._id !== id));
+        setOpenModal(false);
+        settobeDeleted(false);
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +49,20 @@ function TicketsTable({ data, setData }) {
             <td className="px-6 py-3">{items.totalPrice}</td>
             <td className="px-6 py-3">{items.status}</td>
             <td className="flex flex-row px-6  py-7">
-              <button onClick={(e) => handleDelete(items._id)}>
+              <button onClick={(e) => {
+                setOpenModal(true);
+                if(tobeDeleted){
+                  handleDelete(items._id);
+                }
+                }}
+                >
+                {openModal && <Modal
+                  handle={settobeDeleted}
+                  open={openModal}
+                  setOpen={setOpenModal}
+                  content={'Are you sure you want to delete the selected ticket ??'}
+                  button={'Delete'}
+                />}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

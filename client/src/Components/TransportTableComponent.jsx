@@ -5,6 +5,7 @@ import UpdateForm from "./UpdateForm";
 
 const TableComponent = ({ data, setData }) => {
   const [showDelet, setShowDelet] = useState(false);
+  const [tobeDeleted , settobeDeleted] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
 
   const [capacity, setCapacity] = useState("");
@@ -16,6 +17,8 @@ const TableComponent = ({ data, setData }) => {
       .then((response) => {
         console.log(response.data);
         setData(data.filter((el) => el._id !== id));
+        setShowDelet(false);
+        settobeDeleted(false);
       })
       .catch((error) => {
         console.log(error);
@@ -52,18 +55,20 @@ const TableComponent = ({ data, setData }) => {
             <td className="px-6 py-3">{item.capacity}</td>
             <td className="px-6 py-3">{item.description}</td>
             <td className="flex flex-row items-center py-3 px-6">
-              {showDelet ? (
+              {showDelet &&  
                 <Modal
                   open={showDelet}
                   setOpen={setShowDelet}
                   content="Are you sure you want to delete this Transport from your list ?"
-                  handle={(e) => handleDelete(item._id)}
+                  handle={settobeDeleted}
                   button={"Delete"}
                 />
-              ) : (
-                ""
-              )}
-              <button onClick={() => setShowDelet(true)}>
+              }
+              <button onClick={(e) => {
+                setShowDelet(true); 
+                if(tobeDeleted)
+                  handleDelete(item._id);
+              }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
