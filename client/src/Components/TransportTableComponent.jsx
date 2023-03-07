@@ -37,6 +37,7 @@ const TableComponent = ({ data, setData }) => {
       .then((res) => {
         console.log(res.data);
         alert("Transport updated successfully");
+        setShowUpdate(false);
       })
       .catch((error) => {
         if (error.response) {
@@ -100,6 +101,8 @@ const TableComponent = ({ data, setData }) => {
                 onClick={() => {
                   setShowUpdate(true);
                   setToBeUpdated(item._id);
+                  setCapacity(item.capacity);
+                  setDescription(item.description);
                 }}
               >
                 {showUpdate ? (
