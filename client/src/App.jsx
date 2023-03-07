@@ -35,7 +35,7 @@ const DefaultContainer = () => {
         <Header />
         <Routes>
           <Route
-            path="/home"
+            path="/"
             element={
               <Protected>
                 <HomePage />
@@ -62,7 +62,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/dashboard/*"
+          path="/*"
           element={
             <Protected>
               <DefaultContainer />

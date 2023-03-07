@@ -27,37 +27,37 @@ const NavBar = () => {
             <NavItem
               name="Dashboard"
               icon={<RiDashboardLine className="mr-2" size={24} />}
-              navigation="/dashboard/home"
+              navigation="/"
             />
             <NavItem
               name="My Profile"
               icon={<HiOutlineUserCircle className="mr-2" size={24} />}
-              navigation="/dashboard/profile"
+              navigation="/profile"
             />
             <NavItem
               name="Clients"
               icon={<HiOutlineUsers className="mr-2" size={24} />}
-              navigation={"/dashboard/users/clients"}
+              navigation={"/users/clients"}
             />
             <NavItem
               name="Admins"
               icon={<RiAdminLine color="#fff" className="mr-2" size={24} />}
-              navigation={"/dashboard/users/admins"}
+              navigation={"/users/admins"}
             />
             <NavItem
               name="Tickets"
               icon={<HiOutlineTicket className="mr-2" size={24} />}
-              navigation="/dashboard/tickets"
+              navigation="/tickets"
             />
             <NavItem
               name="Transport"
               icon={<RiBusLine className="mr-2" size={24} />}
-              navigation="/dashboard/transport"
+              navigation="/transport"
             />
             <NavItem
               name="Trips"
               icon={<RiBusLine className="mr-2" size={24} />}
-              navigation="/dashboard/trips"
+              navigation="/trips"
             />
           </div>
         </div>
