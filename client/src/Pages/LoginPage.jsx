@@ -13,7 +13,7 @@ const LoginPage = () => {
     e.preventDefault();
     await signin(email, password);
     setTimeout(() => {
-      navigate("/dashboard/home");
+      navigate("/");
     }, 2000);
   };
 

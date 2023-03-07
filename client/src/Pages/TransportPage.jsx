@@ -31,7 +31,7 @@ const TransportPage = () => {
   if (loading) return <p>Loading...</p>;
 
   const handleClick = () => {
-    navigate(`/dashboard/transport/addVehicule`);
+    navigate(`/transport/addVehicule`);
   };
 
   const handleUpdate = () => {};

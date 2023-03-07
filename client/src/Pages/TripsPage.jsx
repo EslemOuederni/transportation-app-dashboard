@@ -26,7 +26,7 @@ const TripsPage = () => {
   }, []);
 
   const handleClick = () => {
-    navigate(`/dashboard/trips/addTrip`);
+    navigate(`/trips/addTrip`);
   };
 
   return (
