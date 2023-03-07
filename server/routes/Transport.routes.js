@@ -15,7 +15,7 @@ transportRouter.get("/:id", getOneTransport);
 transportRouter.get("/mean/:transportMean", getTransportsByTransportMean);
 transportRouter.get("/", getTransports);
 transportRouter.post("/", addTransport);
-transportRouter.patch("/:id", updateTransport);
+transportRouter.patch("/update/:id", updateTransport);
 transportRouter.delete("/:id", deleteTransport);
 
 module.exports = transportRouter;

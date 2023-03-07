@@ -61,20 +61,22 @@ module.exports.addTransport = async (req, res) => {
 
 // UPDATE a transport
 module.exports.updateTransport = async (req, res) => {
-  const { id } = req.body;
-
-  const Transport = await transport.findOneAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
-
-  if (!Transport) {
-    return res.status(404).json({ message: "Transport not found" });
+  const { id } = req.params;
+  const { description, capacity } = req.body;
+  try {
+    const Transport = await transport.findOneAndUpdate(
+      { _id: id },
+      {
+        // transportMean: transportMean,
+        //registrationNumber: registrationNumber,
+        capacity: capacity,
+        description: description,
+      }
+    );
+    res.status(201).json(Transport);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
-
-  res.status(201).json(Transport);
 };
 
 // DELETE a transport
