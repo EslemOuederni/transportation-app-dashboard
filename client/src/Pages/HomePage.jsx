@@ -96,8 +96,18 @@ const HomePage = () => {
               />
             </svg>
           }
-          bg={"bg-red-100"}
+          bg={"bg-tertiary"}
         />
+      </div>
+      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
+        <div>
+          {" "}
+          <ChartComponent />
+        </div>
+        <div>
+          {" "}
+          <PieChartComponent />
+        </div>
       </div>
       <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
         <div>
