@@ -48,21 +48,23 @@ const TableComponent = ({ data, setData }) => {
   };
 
   return (
-    <table className="text-left text-gray-100  mt-4 text-lg">
-      <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+    <table className="table-auto text-left m-8 p-10 text-lg">
+      <thead className="text-lg uppercase text-gray-300  bg-slate-500 mx-10 px-10">
         <tr>
           <th className="px-6 py-3">Registeration Number</th>
           <th className="px-6 py-3">Capacity</th>
           <th className="px-6 py-3">Description</th>
+          <th className="px-6 py-3">Type</th>
           <th>Action</th>
         </tr>
       </thead>
-      <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
+      <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700 border-b dark:text-white">
         {data.map((item, index) => (
           <tr className="bg-white border-b" key={index}>
             <td className="px-6 py-3">{item.registrationNumber}</td>
             <td className="px-6 py-3">{item.capacity}</td>
             <td className="px-6 py-3">{item.description}</td>
+            <td className="px-6 py-3">{item.transportMean}</td>
             <td className="flex flex-row items-center py-3 px-6">
               <button
                 onClick={(e) => {
