@@ -9,10 +9,10 @@ const NavItem = ({ name, icon, navigation, style }) => {
   };
   return (
     <button
-      className={` w-[150px] md:w-[267px] text-white hover:bg-emerald-700 py-2 mx-1 rounded ${style} `}
+      className={` w-10 md:w-[267px] text-slate-900 hover:bg-secondary py-1 rounded ${style} pl-4`}
       onClick={handleClick}
     >
-      <h4 className="flex flex-row items-center font-semibold lg:text-[18px] ml-2">
+      <h4 className=" text-xs flex flex-row items-center md:font-semibold lg:text-[18px] ml-2">
         {icon} {name}
       </h4>
     </button>

@@ -1,29 +1,39 @@
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.svg";
+import minilogo from "../assets/minlogo.svg";
 import NavItem from "./NavItem";
 import {
   HiOutlineUserCircle,
   HiOutlineUsers,
   HiOutlineTicket,
 } from "react-icons/hi";
-import { RiDashboardLine, RiBusLine, RiAdminLine } from "react-icons/ri";
-import { Transition } from "@headlessui/react";
+import {
+  RiDashboardLine,
+  RiBusLine,
+  RiAdminLine,
+  RiLogoutBoxRLine,
+} from "react-icons/ri";
+import { BiTrip } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import useLogout from "../Hooks/useSignOut";
 
 const NavBar = () => {
-  const [showMenu, setShowMenu] = React.useState(false);
-
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigation = useNavigate();
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout();
+    navigation("/auth/login");
   };
+
   return (
     <>
-      <div className="hidden md:flex w-[290px] h-screen bg-slate-900 absolute top-0 left-0">
+      <div className="hidden md:flex w-[290px] h-screen bg-white absolute top-0 left-0 border-r border-slate-900">
         <div className="flex flex-col items-center">
-          <div className=" p-9">
-            <img src={logo} alt="" />
+          <div className="hidden md:flex p-9">
+            <img src={logo} alt="logo" />
           </div>
-
-          <div className="navigation flex flex-col justify-between gap-8 pl-4">
+          <div className="navigation flex flex-col justify-between gap-4">
             <NavItem
               name="Dashboard"
               icon={<RiDashboardLine className="mr-2" size={24} />}
@@ -41,7 +51,7 @@ const NavBar = () => {
             />
             <NavItem
               name="Admins"
-              icon={<RiAdminLine color="#fff" className="mr-2" size={24} />}
+              icon={<RiAdminLine className="mr-2" size={24} />}
               navigation={"/users/admins"}
             />
             <NavItem
@@ -50,60 +60,69 @@ const NavBar = () => {
               navigation="/tickets"
             />
             <NavItem
-              name="Transport"
+              name="Transports"
               icon={<RiBusLine className="mr-2" size={24} />}
               navigation="/transport"
             />
             <NavItem
               name="Trips"
-              icon={<RiBusLine className="mr-2" size={24} />}
+              icon={<BiTrip className="mr-2" size={24} />}
               navigation="/trips"
             />
+            <div className=" mt-16 text-center ">
+              <h3 className="mx-auto font-bold">
+                {user.firstName} {user.lastName}
+              </h3>
+              <p className=" text-slate-500">{user.email}</p>
+            </div>
+            <div className=" mt-2 mb-4 mx-auto">
+              <button
+                onClick={handleLogout}
+                className=" w-12 h-12 border rounded-md border-slate-500"
+              >
+                <RiLogoutBoxRLine
+                  className="mx-auto hover:text-secondary"
+                  size={24}
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="md:hidden w-[200px] h-full bg-slate-900 absolute top-0 left-0">
-        <div className="flex justify-between items-center p-4">
-          <img src={logo} alt="" />
+      <div className="md:hidden w-[80px] h-full bg-white absolute top-0 left-0 border-r border-slate-900">
+        <div className="flex justify-center py-6">
+          <img src={minilogo} alt="minilogo" />
         </div>
-        <div className="flex flex-col justify-between gap-8 pl-4">
+        <div className="flex flex-col justify-between gap-4 pl-4">
           <NavItem
-            name="Dashboard"
             icon={<RiDashboardLine className="mr-2" size={24} />}
-            navigation="/dashboard/home"
+            navigation="/"
           />
           <NavItem
-            name="My Profile"
             icon={<HiOutlineUserCircle className="mr-2" size={24} />}
-            navigation="/dashboard/profile"
+            navigation="/profile"
           />
           <NavItem
-            name="Clients"
             icon={<HiOutlineUsers className="mr-2" size={24} />}
-            navigation={"/dashboard/users/clients"}
+            navigation={"/users/clients"}
           />
           <NavItem
-            name="Admins"
-            icon={<RiAdminLine color="#fff" className="mr-2" size={24} />}
-            navigation={"/dashboard/users/admins"}
+            icon={<RiAdminLine className="mr-2" size={24} />}
+            navigation={"/users/admins"}
           />
           <NavItem
-            name="Tickets"
             icon={<HiOutlineTicket className="mr-2" size={24} />}
-            navigation="/dashboard/tickets"
+            navigation="/tickets"
           />
           <NavItem
-            name="Transport"
             icon={<RiBusLine className="mr-2" size={24} />}
-            navigation="/dashboard/transport"
+            navigation="/transport"
           />
           <NavItem
-            name="Trips"
-            icon={<RiBusLine className="mr-2" size={24} />}
-            navigation="/dashboard/trips"
+            icon={<BiTrip className="mr-2" size={24} />}
+            navigation="/trips"
           />
           <NavItem
-            name="Logout"
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
