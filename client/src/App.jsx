@@ -17,20 +17,26 @@ import EditProfilePage from "./Pages/EditProfilePage";
 import AdminPage from "./Pages/AdminPage";
 import ClientPage from "./Pages/ClientPage";
 import Footer from "./Components/Footer";
+import logo from "./assets/whitelogo.svg";
 
 const LoginContainer = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/resetPwd/:id" element={<ResetPwdPage />} />
-    </Routes>
+    <div className="w-full h-screen top-0 pt-9 bg-slate-800">
+      <div className=" w-32 mb-5 mx-auto">
+        <img src={logo} alt="logo" />
+      </div>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/resetPwd/:id" element={<ResetPwdPage />} />
+      </Routes>
+    </div>
   );
 };
 const DefaultContainer = () => {
   return (
     <>
-      <div className=" overflow-auto  h-[750px] lg:h-[900px]">
+      <div className=" overflow-auto lg:h-[700px] defaultContainer">
         <NavBar />
         <Header />
         <Routes>
