@@ -7,11 +7,6 @@ const PieChartComponent = () => {
   const [labels, setLabels] = useState([]);
   const [count, setCount] = useState([]);
 
-  const findCity = async (city) => {
-    const res = await axios.get(`http://localhost:3000/api/city/${city}`);
-    return res.data.name;
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,11 +45,7 @@ const PieChartComponent = () => {
       {
         label: labels.map((item) => item.name),
         data: count,
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
+        backgroundColor: ["#D5E87E", "#6b5287", "rgb(255, 205, 86)"],
         hoverOffset: 2,
       },
     ],

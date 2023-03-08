@@ -48,8 +48,8 @@ const ChartComponent = () => {
     datasets: [
       {
         label: "Amount of tickets per month",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "#6b5287",
+        borderColor: "#6b5287",
         data: count,
       },
     ],
