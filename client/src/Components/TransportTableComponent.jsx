@@ -38,6 +38,7 @@ const TableComponent = ({ data, setData }) => {
         console.log(res.data);
         alert("Transport updated successfully");
         setShowUpdate(false);
+        setData(data);
       })
       .catch((error) => {
         if (error.response) {

@@ -24,7 +24,7 @@ const TransportPage = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   const filteredArray = _.chain(data).map("transportMean").uniq().value();
 
