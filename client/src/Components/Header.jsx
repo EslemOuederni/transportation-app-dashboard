@@ -28,20 +28,22 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-full h-[100px] border-b-[1px] border-gray-300">
-      <div className=" justify-around flex flex-row lg:justify-between pt-[34px]">
+    <div className="w-full h-[80px] bg-primary">
+      <div className="flex flex-row justify-around lg:justify-between items-center pt-6">
         <div className="flex flex-row items-center">
-          <p className="font-bold text-2xl ml-8 ">{time}</p>
+          <p className=" text-sm font-bold md:text-2xl ml-8 text-white">
+            {time}
+          </p>
           <div className=" ml-1 md:ml-2">{icon}</div>
         </div>
-        <div className="flex flex-row ">
-          <h5 className="flex flex-row items-center font-semibold text-xl capitalize">
-            <IoIosNotificationsOutline
-              className="mr-2 md:mr-8 cursor-pointer"
+        <div className="flex flex-row mr-5 ">
+          <h5 className="text-md flex flex-row items-center font-semibold md:text-xl capitalize text-secondary mr-3">
+            {/* <IoIosNotificationsOutline
+              className="mr-1 cursor-pointer"
               size={26}
-            />
+              color="white"
+            /> */}
             {user.firstName}
-            <DropDownMenu />
           </h5>
         </div>
       </div>
