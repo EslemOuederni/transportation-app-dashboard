@@ -1,9 +1,12 @@
-html {
-  height: 100vh;
+.defaultContainer {
   margin-left: 290px;
   padding: 0;
-  overflow-x: hidden;
+  height: 100vh;
   overflow-y: hidden;
+}
+html {
+  overflow-y: hidden;
+  scroll-behavior: smooth;
 }
 body {
   scroll-behavior: smooth;
@@ -12,7 +15,10 @@ body {
   width: calc(100% - 290px);
 }
 @media screen and (max-width: 768px) {
-  html {
-    margin-left: 190px;
+  .defaultContainer {
+    margin-left: 80px;
+  }
+  .footer {
+    width: calc(100% - 80px);
   }
 }
