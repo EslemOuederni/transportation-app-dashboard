@@ -3,6 +3,7 @@ import ChartCard from "../Components/Card";
 import axios from "axios";
 import ChartComponent from "../Components/BarChartComponent";
 import PieChartComponent from "../Components/PieChartComponent";
+import RecentUsers from "../Components/RecentUsers";
 
 const HomePage = () => {
   const [numberOfUsers, setNumberOfUsers] = useState(0);
@@ -34,7 +35,7 @@ const HomePage = () => {
 
   return (
     <div className="h-full">
-      <div className=" flex items-center justify-center mr-3 xl:divide-x xl:divide-y-0 mt-4 flex-wrap">
+      <div className="flex items-center mr-3 xl:divide-x xl:divide-y-0 mt-4 flex-wrap md:flex-nowrap px-4">
         <ChartCard
           name="Users"
           data={numberOfUsers}
@@ -79,7 +80,7 @@ const HomePage = () => {
         />
         <ChartCard
           name="Money"
-          data={moneyEarned}
+          data={`${moneyEarned} DT `}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,25 +99,39 @@ const HomePage = () => {
           }
           bg={"bg-tertiary"}
         />
+        <ChartCard
+          name="Tickets"
+          data={0}
+          svg={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6M4 20h16a2 2 0 002-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          }
+          bg={"bg-primary"}
+        />
       </div>
-      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
-        <div>
-          {" "}
-          <ChartComponent />
+      <div className="flex flex-row px-4">
+        <div className="flex-col flex lg:flex-row items-center mt-4 mr-12">
+          <div>
+            <ChartComponent />
+          </div>
+          <div>
+            <PieChartComponent />
+          </div>
         </div>
         <div>
-          {" "}
-          <PieChartComponent />
-        </div>
-      </div>
-      <div className="flex-col flex lg:flex-row justify-around items-center mt-4 ml-4">
-        <div>
-          {" "}
-          <ChartComponent />
-        </div>
-        <div>
-          {" "}
-          <PieChartComponent />
+          <RecentUsers />
         </div>
       </div>
     </div>
