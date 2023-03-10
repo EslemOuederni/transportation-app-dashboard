@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from "./Modal";
 import UpdateForm from "./UpdateForm";
+import {
+  ExclamationTriangleIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
 
 const TableComponent = ({ data, setData }) => {
   const [showDelete, setShowDelete] = useState(false);
@@ -64,7 +68,7 @@ const TableComponent = ({ data, setData }) => {
           <tr className="bg-white border-b" key={index}>
             <td className="px-6 py-3">{item.registrationNumber}</td>
             <td className="px-6 py-3">{item.capacity}</td>
-            <td className="px-6 py-3">{item.description}</td>
+            <td className="px-6 py-3">{item.description.slice(0, 20)} </td>
             <td className="px-6 py-3">{item.transportMean}</td>
             <td className="flex flex-row items-center py-3 px-6">
               <button
@@ -94,6 +98,13 @@ const TableComponent = ({ data, setData }) => {
                     content="Are you sure you want to delete this Transport from your list ?"
                     handle={(e) => handleDelete(tobeDeleted)}
                     button={"Delete"}
+                    icon={
+                      <ExclamationTriangleIcon
+                        className="h-6 w-6 text-red-600"
+                        aria-hidden="true"
+                      />
+                    }
+                    color={"bg-red-600"}
                   />
                 )}
               </button>
@@ -118,13 +129,17 @@ const TableComponent = ({ data, setData }) => {
                         setDescription={setDescription}
                         capacity={capacity}
                         description={description}
-                        updateTransport={(e) => {
-                          updateTransport(toBeUpdated, e);
-                        }}
                       />
                     }
                     handle={(e) => updateTransport(toBeUpdated, e)}
                     button={"Edit"}
+                    icon={
+                      <ArrowPathIcon
+                        className="h-6 w-6 text-green-600"
+                        aria-hidden="true"
+                      />
+                    }
+                    color={"bg-green-600"}
                   />
                 ) : (
                   ""
