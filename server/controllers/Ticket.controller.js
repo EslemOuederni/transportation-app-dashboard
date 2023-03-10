@@ -115,7 +115,7 @@ module.exports.countTicketByMonth = async (req, res) => {
         _id: {
           $month: "$createdAt",
         },
-        count: { $sum: 1 },
+        count: { $sum: "$quantity" },
       },
     },
     { $sort: { _id: 1 } },

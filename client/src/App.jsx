@@ -36,7 +36,7 @@ const LoginContainer = () => {
 const DefaultContainer = () => {
   return (
     <>
-      <div className=" overflow-auto lg:h-[700px] defaultContainer">
+      <div className=" overflow-auto h-screen defaultContainer mb-10">
         <NavBar />
         <Header />
         <Routes>
@@ -58,7 +58,7 @@ const DefaultContainer = () => {
           <Route path="/trips" element={<TripsPage />} />
           <Route path="/trips/addTrip" element={<AddTrip />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

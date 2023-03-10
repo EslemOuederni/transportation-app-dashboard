@@ -21,7 +21,7 @@ const TicketSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["Booked", "Terminated"],
+    enum: ["Booked", "Cancelled", "Completed"],
     required: true,
   },
   createdAt: {

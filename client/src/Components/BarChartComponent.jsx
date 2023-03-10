@@ -5,6 +5,7 @@ import axios from "axios";
 
 const ChartComponent = () => {
   const [chartData, setChartData] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
   const [month, setMonth] = useState([]);
   const [count, setCount] = useState([]);
   const months = [
@@ -35,37 +36,37 @@ const ChartComponent = () => {
     getTicketData();
   }, []);
   useEffect(() => {
-    chartData.forEach((item) => {
-      if (month.indexOf(matchMonth(item._id)) === -1) {
-        month.push(matchMonth(item._id));
-        count.push(item.count);
-      }
-    });
+    setSortedData(
+      chartData
+        .map((item) => {
+          const month = matchMonth(item._id);
+          return {
+            month: month,
+            count: item.count,
+          };
+        })
+        .sort((a, b) => a.month - b.month)
+    );
+
+    setMonth(sortedData.map((item) => item.month));
+    setCount(sortedData.map((item) => item.count));
   }, [chartData]);
 
   const data = {
-    labels: months,
+    labels: month,
     datasets: [
       {
-        label: "Amount of tickets per month",
-        backgroundColor: "#6b5287",
-        borderColor: "#6b5287",
+        label: "Number of Tickets Booked",
         data: count,
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
       },
     ],
   };
   return (
     <div className=" max-w-sm max-h-sm mb-4">
-      <Bar
-        data={data}
-        options={{
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        }}
-      />
+      <Bar data={data} />
     </div>
   );
 };

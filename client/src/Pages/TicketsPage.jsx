@@ -21,9 +21,8 @@ const TicketsPage = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="mx-3 mb-24">
       <h1 className="text-2xl font-bold px-3 mb-3 mt-3">Tickets</h1>
-
       <TicketsTable data={data} setData={setData} />
     </div>
   );
