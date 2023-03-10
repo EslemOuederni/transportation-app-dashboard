@@ -13,7 +13,6 @@ const PieChartComponent = () => {
         await axios
           .get("http://localhost:3000/api/ticket/count/trip")
           .then((res) => {
-            console.log(res.data);
             setTickets(res.data);
           })
           .catch((error) => {
@@ -28,16 +27,12 @@ const PieChartComponent = () => {
   }, []);
 
   useEffect(() => {
-    console.log(tickets);
     tickets.map((item) => {
-      console.log(item.arrivalCity.name);
       if (labels.includes(item.arrivalCity) === false) {
         labels.push(item.arrivalCity);
         count.push(item.count);
       }
     });
-
-    console.log(tickets);
   }, [tickets]);
   const data = {
     labels: labels,
