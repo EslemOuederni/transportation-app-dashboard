@@ -119,7 +119,7 @@ const TableComponent = ({ data, setData }) => {
                   setDescription(item.description);
                 }}
               >
-                {showUpdate ? (
+                {showUpdate && (
                   <Modal
                     open={showUpdate}
                     setOpen={setShowUpdate}
@@ -141,8 +141,6 @@ const TableComponent = ({ data, setData }) => {
                     }
                     color={"bg-green-600"}
                   />
-                ) : (
-                  ""
                 )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
