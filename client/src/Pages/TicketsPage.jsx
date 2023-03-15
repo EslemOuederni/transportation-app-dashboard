@@ -18,7 +18,7 @@ const TicketsPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <div className="mx-3 mb-24">

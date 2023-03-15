@@ -65,9 +65,32 @@ module.exports.postTicket = async (req, res) => {
 
 // UPDATE a ticket
 module.exports.updateTicket = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No ticket with this ID" });
+  }
+  const { user, trip, quantity, totalPrice, status, createdAt, updatedAt } =
+    req.body;
   try {
-    const ticket = await Ticket.findByIdAndUpdate({ _id: id }, { ...req.body });
+    console.log("trip is", trip);
+    const T = await Trip.findOne({ _id: trip });
+    const price = T.price;
+    console.log("price is", price);
+    const ticket = await Ticket.findByIdAndUpdate(
+      id,
+      {
+        user,
+        trip,
+        quantity,
+        totalPrice,
+        status,
+        createdAt,
+        updatedAt,
+        totalPrice: price * quantity,
+      },
+      { new: true }
+    );
+
     res.status(200).json(ticket);
   } catch (error) {
     res.status(400).json({ message: error });
