@@ -37,10 +37,15 @@ const TransportPage = () => {
   const handleUpdate = () => {};
 
   return (
-    <div className="mt-4 pt-5 ml-[100px] mb-4 flex flex-col h-full w-72">
-      <AddButton handleClick={handleClick} name="Vehicule" />
+    <div className="mt-4 pt-5 mb-4 flex flex-col h-full">
+      <div className=" ml-8">
+        <AddButton handleClick={handleClick} name="Vehicule" />
+      </div>
       <div>
-        <label> Mean of Transportation : </label>
+        <label className=" font-semibold ml-8">
+          {" "}
+          Mean of Transportation :{" "}
+        </label>
         <select className=" px-4 py-2 rounded-md uppercase font-semibold">
           {filteredArray.map((item, index) => (
             <option value={item.transportMean} key={index} className="">

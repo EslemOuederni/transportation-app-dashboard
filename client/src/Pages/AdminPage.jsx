@@ -32,17 +32,16 @@ const AdminPage = () => {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <div>
-      <h1>List Of Admins</h1>
-      <table className="text-left text-gray-100  mt-4 text-lg">
-        <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+    <div className="rounded-lg overflow-hidden border border-slate-300 m-8">
+      <table className="table-auto text-left  p-10 text-lg w-full">
+        <thead className=" capitalize text-gray-800 bg-white border-b">
           <tr>
             <th className="px-6 py-3">First Name</th>
             <th className="px-6 py-3">Last Name</th>
             <th className="px-6 py-3">Email</th>
           </tr>
         </thead>
-        <tbody className=" [&>*:nth-child(odd)]:bg-gray-900 [&>*:nth-child(even)]:bg-gray-700">
+        <tbody className=" border-b dark:border-gray-700 text-slate-900 [&>*:nth-child(odd)]:bg-gray-100 [&>*:nth-child(even)]:bg-white">
           {data.map((item, index) => (
             <tr className="bg-white border-b" key={item._id.toString()}>
               <td className="px-6 py-3">{item.firstName}</td>

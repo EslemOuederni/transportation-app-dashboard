@@ -65,7 +65,7 @@ function TicketsTable({ data, setData }) {
   return (
     <div className=" rounded-lg overflow-hidden border border-slate-300 m-8">
       <table className=" table-auto text-left  p-10 text-lg w-full">
-        <thead className=" capitalize text-gray-500 bg-white border-b">
+        <thead className=" capitalize text-gray-800 bg-white border-b">
           <tr>
             <th className="px-4 py-3">user</th>
             <th className="px-4 -py-3">trip</th>
@@ -75,7 +75,7 @@ function TicketsTable({ data, setData }) {
             <th className=""></th>
           </tr>
         </thead>
-        <tbody className=" border-b bg-white dark:border-gray-700 text-slate-900">
+        <tbody className=" border-b [&>*:nth-child(odd)]:bg-gray-100 [&>*:nth-child(even)]:bg-white dark:border-gray-700 text-slate-900">
           {data.map((items, index) => (
             <tr className=" border-b" key={items._id.toString()}>
               <td className="px-6 py-3">
