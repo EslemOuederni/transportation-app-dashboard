@@ -28,9 +28,9 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="hidden md:flex w-[290px] h-screen bg-white absolute top-0 left-0 border-r border-slate-900">
+      <div className="hidden md:block md:w-[200px] lg:w-[290px] h-screen bg-white absolute top-0 left-0 border-r border-slate-900">
         <div className="flex flex-col items-center">
-          <div className="hidden md:flex p-9">
+          <div className="hidden md:block md:w-3/4 md:p-4 lg:p-9 lg:w-full">
             <img src={logo} alt="logo" />
           </div>
           <div className="navigation flex flex-col justify-between gap-4">

@@ -34,8 +34,8 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="h-full">
-      <div className="flex items-center mr-3 xl:divide-x xl:divide-y-0 mt-4 flex-wrap md:flex-nowrap px-4">
+    <div className="h-full overflow-hidden">
+      <div className="flex items-center justify-center flex-wrap ml-8 mt-2">
         <ChartCard
           name="Users"
           data={numberOfUsers}
@@ -55,7 +55,7 @@ const HomePage = () => {
               />
             </svg>
           }
-          bg={"bg-green-100"}
+          bg={"bg-orange-400"}
         />
         <ChartCard
           name="Trips"
@@ -76,11 +76,11 @@ const HomePage = () => {
               />
             </svg>
           }
-          bg={"bg-yellow-100"}
+          bg={" bg-secondary"}
         />
         <ChartCard
-          name="Money"
-          data={`${moneyEarned} DT `}
+          name="DT"
+          data={`${moneyEarned} `}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ const HomePage = () => {
         />
         <ChartCard
           name="Tickets"
-          data={0}
+          data={12}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -119,10 +119,11 @@ const HomePage = () => {
             </svg>
           }
           bg={"bg-primary"}
+          text={"text-secondary"}
         />
       </div>
-      <div className="flex flex-row px-4">
-        <div className="flex-col flex lg:flex-row items-center mt-4 mr-12">
+      <div className="flex flex-col justify-center md:flex-row ml-8">
+        <div className="flex-col flex lg:flex-row items-center mt-4 md:mr-12">
           <div>
             <ChartComponent />
           </div>
