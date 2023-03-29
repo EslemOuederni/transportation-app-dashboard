@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 
-const useSignUp = () => {
+export const useSignUp = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const { dispatch } = useContext(AuthContext);
@@ -58,5 +58,3 @@ const useSignUp = () => {
 
   return { error, loading, signup };
 };
-
-export default useSignUp;

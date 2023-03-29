@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useSignUp from "../Hooks/useSignup";
+import { useSignUp } from "../Hooks/useSignup";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
