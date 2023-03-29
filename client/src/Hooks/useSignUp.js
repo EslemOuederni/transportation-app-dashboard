@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 
-export const useSignUp = () => {
+export const UseSignUp = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const { dispatch } = useContext(AuthContext);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignUp } from "../Hooks/useSignup";
+import { UseSignUp } from "../Hooks/useSignup";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +8,7 @@ const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const { error, loading, signup } = useSignUp();
+  const { error, loading, signup } = UseSignUp();
 
   let navigate = useNavigate();
   console.log(error);
