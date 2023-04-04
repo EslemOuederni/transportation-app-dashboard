@@ -59,9 +59,9 @@ The dashboard manage:
 
 - #### `server.js` - Defines npm behaviors and packages for the client
 
-#### `package.json` - Defines npm behaviors like the scripts defined in the next section of the README
+#### CODE_OF_CONDUCT.md - Code of Conduct for the project
 
-#### `.gitignore` - Tells git which files to ignore
+#### LICENSE - License for the project
 
 #### `README` - This file
 
@@ -70,7 +70,7 @@ The dashboard manage:
 Since this project will hold both the client application and the server application there will be node modules in two different places.
 First make sure to run `npm install` from the root.
 Then run `npm install` in `/client`
-Then create `.env` file in `/` where it contains this following structure:
+Then create `.env` file in `/server` where it contains this following structure:
 
 ```text
 JWT_SECRET=<your_secret>
