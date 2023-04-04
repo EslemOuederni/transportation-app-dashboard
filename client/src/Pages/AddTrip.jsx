@@ -3,6 +3,7 @@ import { useState } from "react";
 import Input from "../Components/Input";
 import { useEffect } from "react";
 import axios from "axios";
+import { baseURL } from "../api";
 const AddTrip = () => {
   const transportationMean = ["car", "bus", "train", "plane"];
   const [transport, setTransport] = useState(transportationMean[0]);
@@ -16,7 +17,7 @@ const AddTrip = () => {
   const [chosen, setChosen] = useState(null);
 
   const getCities = () => {
-    axios.get("http://localhost:3000/api/city").then((res) => {
+    axios.get(`${baseURL}/city`).then((res) => {
       setCities([...res.data]);
     });
   };

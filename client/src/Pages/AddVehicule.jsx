@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AddForm from "../Components/AddForm";
 import axios from "axios";
+import { baseURL } from "../api";
 
 const AddVehicule = () => {
   const transportationMean = ["car", "bus", "train", "plane"];
@@ -19,10 +20,7 @@ const AddVehicule = () => {
     };
     console.log(vehicule);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/transport/",
-        vehicule
-      );
+      const response = await axios.post(`${baseURL}/transport/`, vehicule);
       console.log(response);
       if (response.status === 200 || response.status === 201) {
         console.log("vehicule added");

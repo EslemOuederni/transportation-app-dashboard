@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { baseURL } from "../api";
 
 const AdminPage = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const AdminPage = () => {
   const fetchData = async () => {
     try {
       await axios
-        .get("http://localhost:3000/api/admin/getAllAdmins", {
+        .get(`${baseURL}/admin/getAllAdmins`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { baseURL } from "../api";
 
 export const UseSignUp = () => {
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ export const UseSignUp = () => {
     try {
       await axios
         .post(
-          "http://localhost:3000/api/admin/register",
+          `${baseURL}/admin/register`,
           { email, password, firstName, lastName },
           { headers: { "Access-Control-Allow-Origin": "*" } }
         )
