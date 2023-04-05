@@ -2,12 +2,24 @@ const express = require("express");
 const router = require("./routes/index.routes");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { baseURL } = require("../client/src/api");
 require("dotenv").config();
 const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = baseURL;
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 //routes
 app.use(router);
 
