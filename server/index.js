@@ -7,19 +7,7 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-const allowedOrigins =
-  "https://transportation-app-dashboard-server.vercel.app/api";
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
+app.use(cors());
 //routes
 app.use(router);
 
