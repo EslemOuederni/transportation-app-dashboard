@@ -18,7 +18,6 @@ function TicketsTable({ data, setData }) {
   const [toBeUpdated, setToBeUpdated] = useState("");
   const [trip, setTrip] = useState("");
 
-  console.log(data);
   const tripId = (id) => {
     for (let i = 0; i < data.length; i++) {
       if (data[i]._id === id) {
@@ -31,7 +30,6 @@ function TicketsTable({ data, setData }) {
     axios
       .delete(`${baseURL}/ticket/` + id)
       .then((response) => {
-        console.log(response.data);
         setData(data.filter((el) => el._id !== id));
       })
       .catch((error) => {
@@ -40,11 +38,7 @@ function TicketsTable({ data, setData }) {
   };
   // update function
   const handleUpdate = (id, e) => {
-    console.log(id);
-    console.log("quantity: " + quantity);
-    console.log("status: " + status);
     const t = tripId(id);
-    console.log(t);
     e.preventDefault();
     axios
       .patch(`${baseURL}/ticket/update/${id}`, {
@@ -53,7 +47,6 @@ function TicketsTable({ data, setData }) {
         trip: t,
       })
       .then((res) => {
-        console.log(res);
         alert("Trip updated successfully");
         setData(data);
         setShowUpdateModal(false);

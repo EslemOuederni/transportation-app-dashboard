@@ -14,11 +14,9 @@ const TripsTableComponent = ({ data, setData }) => {
   // delete function
 
   const handleDelete = (id) => {
-    console.log(id);
     axios
       .delete(`${baseURL}/trip/delete/${id}`)
       .then((res) => {
-        console.log(res);
         setData(data.filter((item) => item._id !== id));
         setShowModal(false);
       })
@@ -29,7 +27,6 @@ const TripsTableComponent = ({ data, setData }) => {
 
   // update function
   const handleUpdate = (id, e) => {
-    console.log(id);
     e.preventDefault();
     axios
       .patch(
@@ -39,7 +36,6 @@ const TripsTableComponent = ({ data, setData }) => {
       }`
       )
       .then((res) => {
-        console.log(res);
         alert("Trip updated successfully");
         setData(data);
         setShowModal(false);
