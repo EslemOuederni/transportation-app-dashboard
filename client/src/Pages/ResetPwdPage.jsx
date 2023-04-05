@@ -15,7 +15,7 @@ const ResetPwdPage = () => {
   useEffect(() => {
     const verifyUrl = async () => {
       try {
-        await axios.get(`${baseURL}/admin/resetPwd/63b5c94303761163ab91f3f2`);
+        await axios.get(`${baseURL}/admin/resetPwd/63b5c94303761163ab91f3f2`); //testing it might not work
         setValidUrl(true);
       } catch (error) {
         console.log(error);
