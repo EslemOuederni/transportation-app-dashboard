@@ -2,13 +2,13 @@ const express = require("express");
 const router = require("./routes/index.routes");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { baseURL } = require("../client/src/api");
 require("dotenv").config();
 const app = express();
 
 //middlewares
 app.use(express.json());
-const allowedOrigins = baseURL;
+const allowedOrigins =
+  "https://transportation-app-dashboard-server.vercel.app/api";
 app.use(
   cors({
     origin: function (origin, callback) {
