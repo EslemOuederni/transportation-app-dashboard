@@ -44,7 +44,7 @@ const ClientPage = () => {
             <tr className="bg-white border-b" key={item._id.toString()}>
               <td className="px-6 py-3">{item.firstName}</td>
               <td className="px-6 py-3">{item.lastName}</td>
-              <td className="px-6 py-3">{item.email}</td>
+              <td className="px-6 py-3">Hidden</td>
             </tr>
           ))}
         </tbody>
