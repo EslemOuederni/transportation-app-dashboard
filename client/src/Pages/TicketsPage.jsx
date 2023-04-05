@@ -2,13 +2,14 @@ import React from "react";
 import TicketsTable from "../Components/TicketsTable";
 import { useState } from "react";
 import { useEffect } from "react";
+import { baseURL } from "../api";
 
 const TicketsPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/api/ticket");
+      const response = await fetch(`${baseURL}/ticket`);
       const json = await response.json();
 
       if (response.ok) {

@@ -6,6 +6,7 @@ import {
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
 import UpdateTicketsForm from "./updateTicketsForm";
+import { baseURL } from "../api";
 
 function TicketsTable({ data, setData }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -28,7 +29,7 @@ function TicketsTable({ data, setData }) {
 
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/ticket/" + id)
+      .delete(`${baseURL}/ticket/` + id)
       .then((response) => {
         console.log(response.data);
         setData(data.filter((el) => el._id !== id));
@@ -46,7 +47,7 @@ function TicketsTable({ data, setData }) {
     console.log(t);
     e.preventDefault();
     axios
-      .patch(`http://localhost:3000/api/ticket/update/${id}`, {
+      .patch(`${baseURL}/ticket/update/${id}`, {
         quantity: quantity,
         status: status,
         trip: t,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import { Bar, Pie } from "react-chartjs-2";
 import axios from "axios";
+import { baseURL } from "../api";
 
 const ChartComponent = () => {
   const [chartData, setChartData] = useState([]);
@@ -28,7 +29,7 @@ const ChartComponent = () => {
   };
 
   const getTicketData = async () => {
-    const res = await axios.get("http://localhost:3000/api/ticket/count/month");
+    const res = await axios.get(`${baseURL}/ticket/count/month`);
     setChartData(res.data);
     return res.data;
   };

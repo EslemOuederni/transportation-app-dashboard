@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Modal from "./Modal";
+import { baseURL } from "../api";
 const TripsTableComponent = ({ data, setData }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [tobeDeleted, settobeDeleted] = useState("");
@@ -15,7 +16,7 @@ const TripsTableComponent = ({ data, setData }) => {
   const handleDelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:3000/api/trip/delete/${id}`)
+      .delete(`${baseURL}/trip/delete/${id}`)
       .then((res) => {
         console.log(res);
         setData(data.filter((item) => item._id !== id));
@@ -32,7 +33,7 @@ const TripsTableComponent = ({ data, setData }) => {
     e.preventDefault();
     axios
       .patch(
-        `http://localhost:3000/api/trip/update/${id},{
+        `${baseURL}/trip/update/${id},{
         quantity: quantity,
         status: status,
       }`

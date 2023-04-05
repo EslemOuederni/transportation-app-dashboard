@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { baseURL } from "../api";
 
 const ResetPwdPage = () => {
   const [validUrl, setValidUrl] = useState(false);
@@ -9,14 +10,12 @@ const ResetPwdPage = () => {
   const [error, setError] = useState("");
   const param = useParams();
 
-  const url = `http://localhost:3000/api/admin/resetPwd/${param.id}`;
+  const url = `${baseURL}/admin/resetPwd/${param.id}`;
 
   useEffect(() => {
     const verifyUrl = async () => {
       try {
-        await axios.get(
-          "http://localhost:3000/api/admin/resetPwd/63b5c94303761163ab91f3f2"
-        );
+        await axios.get(`${baseURL}/admin/resetPwd/63b5c94303761163ab91f3f2`);
         setValidUrl(true);
       } catch (error) {
         console.log(error);

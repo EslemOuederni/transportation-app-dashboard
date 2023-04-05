@@ -13,7 +13,7 @@ const TripsPage = () => {
 
   const fetchData = async () => {
     try {
-      await axios.get("http://localhost:3000/api/trip").then((res) => {
+      await axios.get(`${baseURL}/trip`).then((res) => {
         setData(res.data);
         setLoading(false);
       });

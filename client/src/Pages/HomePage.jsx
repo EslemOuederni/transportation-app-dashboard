@@ -4,26 +4,24 @@ import axios from "axios";
 import ChartComponent from "../Components/BarChartComponent";
 import PieChartComponent from "../Components/PieChartComponent";
 import RecentUsers from "../Components/RecentUsers";
-
+import { baseURL } from "../api";
 const HomePage = () => {
   const [numberOfUsers, setNumberOfUsers] = useState(0);
   const [numberOfTrips, setNumberOfTrips] = useState(0);
   const [moneyEarned, setMoneyEarned] = useState(0);
 
   const count = async () => {
-    const res = await axios.get("http://localhost:3000/api/client/count");
+    const res = await axios.get(`${baseURL}/client/count`);
     setNumberOfUsers(res.data);
     return numberOfUsers, numberOfTrips;
   };
   const countTrips = async () => {
-    const trips = await axios.get("http://localhost:3000/api/trip/get/count");
+    const trips = await axios.get(`${baseURL}/trip/get/count`);
     setNumberOfTrips(trips.data);
     return numberOfTrips;
   };
   const countMoneyEarned = async () => {
-    const money = await axios.get(
-      "http://localhost:3000/api/ticket/count/money"
-    );
+    const money = await axios.get(`${baseURL}/ticket/count/money`);
     setMoneyEarned(money.data);
     return moneyEarned;
   };

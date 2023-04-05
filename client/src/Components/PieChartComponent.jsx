@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
+import { baseURL } from "../api";
 
 const PieChartComponent = () => {
   const [tickets, setTickets] = useState([]);
@@ -11,7 +12,7 @@ const PieChartComponent = () => {
     const fetchData = async () => {
       try {
         await axios
-          .get("http://localhost:3000/api/ticket/count/trip")
+          .get(`${baseURL}/ticket/count/trip`)
           .then((res) => {
             setTickets(res.data);
           })

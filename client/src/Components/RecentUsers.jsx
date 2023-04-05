@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { baseURL } from "../api";
 const RecentUsers = () => {
   const [users, setUsers] = React.useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/ticket/count/user")
+      .get(`${baseURL}/ticket/count/user`)
       .then((res) => {
         setUsers(res.data);
         console.log(res.data);

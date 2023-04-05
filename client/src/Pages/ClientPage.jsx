@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import { baseURL } from "../api";
 const ClientPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const ClientPage = () => {
   const fetchData = async () => {
     try {
       await axios
-        .get("http://localhost:3000/api/client/allClients", {
+        .get(`${baseURL}/client/allClients`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

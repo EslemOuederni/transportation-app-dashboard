@@ -6,6 +6,7 @@ import {
   ExclamationTriangleIcon,
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
+import { baseURL } from "../api";
 
 const TableComponent = ({ data, setData }) => {
   const [showDelete, setShowDelete] = useState(false);
@@ -18,7 +19,7 @@ const TableComponent = ({ data, setData }) => {
 
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/transport/" + id)
+      .delete(`${baseURL}/transport/${id}`)
       .then((response) => {
         console.log(response.data);
         setData(data.filter((el) => el._id !== id));
@@ -34,7 +35,7 @@ const TableComponent = ({ data, setData }) => {
     console.log("capacity: " + capacity);
     console.log("description: " + description);
     axios
-      .patch("http://localhost:3000/api/transport/update/" + id, {
+      .patch(`${baseURL}/transport/update/${id}`, {
         capacity: capacity,
         description: description,
       })

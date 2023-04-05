@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import TableComponent from "../Components/TransportTableComponent";
 import AddButton from "../Components/AddButton";
+import { baseURL } from "../api";
 
 const TransportPage = () => {
   const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ const TransportPage = () => {
 
   const fetchData = async () => {
     try {
-      await axios.get("http://localhost:3000/api/transport").then((res) => {
+      await axios.get(`${baseURL}/transport`).then((res) => {
         setData(res.data);
         setLoading(false);
       });
