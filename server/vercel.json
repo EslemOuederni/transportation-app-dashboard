@@ -17,6 +17,10 @@
     {
       "src": "/api/(.*)",
       "dest": "index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/dist/index.html"
     }
   ],
   "headers": [
