@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://transportation-app-dashboard-server.vercel.app",
+    origin: "https://transportation-app-dashboard-client.vercel.app",
   })
 );
 //routes
