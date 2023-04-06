@@ -7,11 +7,6 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://transportation-app-dashboard-client.vercel.app",
-  })
-);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
