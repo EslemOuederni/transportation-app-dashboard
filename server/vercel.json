@@ -28,7 +28,7 @@
 
     {
       "key": "Access-Control-Allow-Origin",
-      "value": "https://transportation-app-dashboard-server.vercel.app"
+      "value": "https://transportation-app-dashboard-client.vercel.app"
     },
 
     {
