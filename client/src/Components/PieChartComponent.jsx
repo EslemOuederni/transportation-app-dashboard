@@ -36,7 +36,7 @@ const PieChartComponent = () => {
     });
   }, [tickets]);
   const data = {
-    labels: labels,
+    labels: labels.sort(),
     datasets: [
       {
         label: labels.map((item) => item.name),
