@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Modal from "./Modal";
+import {
+  ExclamationTriangleIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
 import { baseURL } from "../api";
 const TripsTableComponent = ({ data, setData }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);

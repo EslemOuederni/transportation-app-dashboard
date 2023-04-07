@@ -3,6 +3,7 @@ import axios from "axios";
 import TripsTableComponent from "../Components/TripsTableComponent";
 import AddButton from "../Components/AddButton";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../api";
 
 const TripsPage = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const TripsPage = () => {
     try {
       await axios.get(`${baseURL}/trip`).then((res) => {
         setData(res.data);
+        console.log(res.data);
         setLoading(false);
       });
     } catch (error) {
