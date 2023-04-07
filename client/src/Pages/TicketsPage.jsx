@@ -6,18 +6,15 @@ import { baseURL } from "../api";
 
 const TicketsPage = () => {
   const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const response = await fetch(`${baseURL}/ticket`);
+    const json = await response.json();
+    if (response.ok) {
+      setData(json);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${baseURL}/ticket`);
-      const json = await response.json();
-
-      if (response.ok) {
-        setData(json);
-      }
-      console.log(json);
-    };
-
     fetchData();
   }, [data]);
 
