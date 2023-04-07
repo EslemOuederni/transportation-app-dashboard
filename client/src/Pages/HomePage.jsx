@@ -13,6 +13,7 @@ const HomePage = () => {
   const count = async () => {
     const res = await axios.get(`${baseURL}/client/count`);
     setNumberOfUsers(res.data);
+    console.log(res.data);
     return numberOfUsers, numberOfTrips;
   };
   const countTrips = async () => {
