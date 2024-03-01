@@ -68,9 +68,10 @@ The dashboard manage:
 ## Installation
 
 Since this project will hold both the client application and the server application there will be node modules in two different places.
-First make sure to run `npm install` from the root.
-Then run `npm install` in `/client`
-Then create `.env` file in `/server` where it contains this following structure:
+
+Run `npm install` in `/client` and in `/server`
+
+Create `.env` file in `/server` where it contains this following structure:
 
 ```text
 JWT_SECRET=<your_secret>
@@ -93,19 +94,11 @@ If I'm missing something, please let me know
 
 In the project directory, you can run:
 
-### `npm run-script dev`
+### `npm run start`
 
 Runs both the client app and the server app in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
-### `npm run-script client`
-
-Runs just the client app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
-
-### `npm run-script server`
-
-Runs just the server in development mode.<br>
 
 ### `npm run build`
 
